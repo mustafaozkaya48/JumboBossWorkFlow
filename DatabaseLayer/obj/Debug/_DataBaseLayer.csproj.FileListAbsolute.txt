@@ -1,0 +1,11 @@
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\bin\Debug\EntityFramework.dll
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\bin\Debug\EntityFramework.xml
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\obj\Debug\_DataBaseLayer.csproj.CoreCompileInputs.cache
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\bin\Debug\_DataBaseLayer.dll.config
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\bin\Debug\_DataBaseLayer.dll
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\bin\Debug\_DataBaseLayer.pdb
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\obj\Debug\_DataBaseLayer.dll
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\obj\Debug\_DataBaseLayer.pdb
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\DatabaseLayer\obj\Debug\_DataBaseLayer.csprojResolveAssemblyReference.cache

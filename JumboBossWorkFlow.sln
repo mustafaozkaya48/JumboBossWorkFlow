@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JumboBossWorkFlow", "JumboBossWorkFlow\JumboBossWorkFlow.csproj", "{6A1FD93B-C157-48E6-BEC2-C2E7D7190C4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_DataBaseLayer", "DatabaseLayer\_DataBaseLayer.csproj", "{33ACAA60-796F-4A0B-8372-E26679F674B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{E2DFE623-94DF-4777-B34D-ABBE6A0D1788}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6A1FD93B-C157-48E6-BEC2-C2E7D7190C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A1FD93B-C157-48E6-BEC2-C2E7D7190C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A1FD93B-C157-48E6-BEC2-C2E7D7190C4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33ACAA60-796F-4A0B-8372-E26679F674B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33ACAA60-796F-4A0B-8372-E26679F674B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33ACAA60-796F-4A0B-8372-E26679F674B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33ACAA60-796F-4A0B-8372-E26679F674B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2DFE623-94DF-4777-B34D-ABBE6A0D1788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2DFE623-94DF-4777-B34D-ABBE6A0D1788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2DFE623-94DF-4777-B34D-ABBE6A0D1788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2DFE623-94DF-4777-B34D-ABBE6A0D1788}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
