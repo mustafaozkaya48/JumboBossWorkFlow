@@ -1,0 +1,141 @@
+﻿@model _DbEntities.Models.RegisterViewModel
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+    <title>Login and Registration Form with HTML5 and CSS3</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/Content/Styles/dist/css/Register.css" rel="stylesheet" />
+</head>
+<body>
+
+
+
+
+    <div class="container">
+        <img src="~/Content/images/Logo.png" style="padding-bottom:10px" /><h1>İş Takip Sistemi</h1>
+
+        <div id="container_demo">
+            <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+            <a class="hiddenanchor" id="toregister"></a>
+            <a class="hiddenanchor" id="tologin"></a>
+            <div id="wrapper">
+
+
+                @**Login Start*@
+                @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+
+                    @Html.AntiForgeryToken()
+                    <div id="login" class="animate form">
+
+
+
+
+                        <h1> Kayıt Ol </h1>
+                        @if (ViewBag.result != null)
+                        {
+                        <p>
+                            <div class="alert alert-success">
+                                <strong style="font-size:16px">Kayıt İşlemi Başarılı.</strong>  Giriş sayfasına yönleniyorsunuz...<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+                            </div>
+                        </p>
+                        }
+                        <p>
+                            <span class="glyphicon glyphicon-user"></span> <label for="username" class="uname">Ad </label>
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Adınızı giriniz", type = "text" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </p>
+                        <p>
+                            <span class="glyphicon glyphicon-user"></span> <label for="username" class="uname">Soyad </label>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.SurName, new { @class = "form-control", placeholder = "Soyadınızı giriniz", type = "text" })
+                            @Html.ValidationMessageFor(model => model.SurName, "", new { @class = "text-danger" })
+                        </p>
+                        <p>
+                            <span class="glyphicon glyphicon-envelope"></span> <label for="username" class="uname">E-Posta </label>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "E-Posta Adresinizi giriniz", type = "email" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </p>
+                        <p>
+                            <span class="glyphicon glyphicon-envelope"></span> <label for="username" class="uname">Cep Telefonu </label>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @name = "Telefon", @id = "phone", @class = "form-control", placeholder = "Cep telefonu" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+
+                        </p>
+                        <p>
+                            <span class="glyphicon glyphicon-user"></span> <label for="username" class="uname">Şifre</label>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifre Giriniz", type = "text" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </p>
+                        <p>
+                            <span class="glyphicon glyphicon-user"></span> <label for="username" class="uname">Şifre(Tekrar)</label>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Şifre Giriniz(Tekrar)", type = "text" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </p>
+                        <p class="keeplogin">
+                            <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+                            <label for="loginkeeping"><a>Sözleşme Şartlarını</a> Okudum ve Kabul Ediyorum</label>
+                        </p>
+                        <p class="signin button">
+                            <input type="submit" id="buttongiris" value="Kayıt Ol" />
+
+                        </p>
+                        <p class="change_link">
+                            Zaten Üyemisiniz ?
+
+                        </p>
+
+                    </div>
+
+
+                }
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/jquery.maskedinput.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#phone').mask('999 999 9999');
+        });
+        $("#buttongiris").click(function () {
+            $('#phone').mask('9999999999');
+        });
+        function Sucsses() {
+            alert('sdasdasd');
+        }
+    </script>
+    @if (ViewBag.result != null)
+    {
+        <script>
+            setTimeout(function myfunction() {
+                window.location = "/WorkFlow/Panel/Home"
+            }, 3500)
+        </script>
+    }
+</body>
+</html>
