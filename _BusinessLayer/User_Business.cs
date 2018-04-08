@@ -22,6 +22,19 @@ namespace _BusinessLayer
 
 
         }
-
+        public void EditProfile(EditProfileViewModel model)
+        {
+            _userrepository.UpdateUser(new ApplicationUser {
+                PhoneNumber = model.PhoneNumber,
+                userInfo = new UserInfo {
+                    About = model.About,
+                    Address=model.Address,
+                    CompanyInfo=model.CompanyInfo,
+                    ProfilPicture=model.ProfilPicture,
+                    Name=model.Name,
+                    SurName=model.SurName,
+                }
+            });
+        }
     }
 }

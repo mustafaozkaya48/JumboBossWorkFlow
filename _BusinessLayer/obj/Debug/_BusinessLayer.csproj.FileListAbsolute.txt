@@ -14,7 +14,6 @@ C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\System.
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\System.Web.WebPages.Razor.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\System.Web.WebPages.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.Web.Infrastructure.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Owin.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\System.Web.WebPages.Deployment.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\_DbEntities.pdb
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\_DbEntities.dll.config
@@ -30,18 +29,8 @@ C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\System.
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\_BusinessLayer.dll.config
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.Owin.Security.Cookies.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.Owin.Security.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.Owin.Security.OAuth.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.Owin.Security.xml
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.Owin.Security.Cookies.xml
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Microsoft.Owin.Security.OAuth.xml
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_BusinessLayer\bin\Debug\Newtonsoft.Json.xml
 D:\JumboBossWorkFlow\_BusinessLayer\bin\Debug\_BusinessLayer.dll.config
 D:\JumboBossWorkFlow\_BusinessLayer\bin\Debug\_BusinessLayer.dll
 D:\JumboBossWorkFlow\_BusinessLayer\bin\Debug\_BusinessLayer.pdb

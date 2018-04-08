@@ -6,8 +6,6 @@ C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\EntityFram
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.Security.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Owin.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\System.Web.Mvc.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\System.Web.Razor.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\System.Web.WebPages.Razor.dll
@@ -19,7 +17,6 @@ C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\EntityFram
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.xml
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.Security.xml
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\System.Web.Mvc.xml
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\System.Web.Razor.xml
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\System.Web.WebPages.Razor.xml
@@ -29,13 +26,7 @@ C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntitie
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.pdb
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.Security.Cookies.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.Security.OAuth.dll
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.Security.Cookies.xml
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.Security.OAuth.xml
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\bin\Debug\Newtonsoft.Json.xml
 D:\JumboBossWorkFlow\_DbEntities\bin\Debug\_DbEntities.dll.config
 D:\JumboBossWorkFlow\_DbEntities\bin\Debug\_DbEntities.dll
 D:\JumboBossWorkFlow\_DbEntities\bin\Debug\_DbEntities.pdb
@@ -118,3 +109,4 @@ C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.
 C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\_DbEntities\bin\Debug\System.Web.Mvc.xml
 C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.csproj.CoreCompileInputs.cache
 C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.csproj.CopyComplete
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.csprojResolveAssemblyReference.cache

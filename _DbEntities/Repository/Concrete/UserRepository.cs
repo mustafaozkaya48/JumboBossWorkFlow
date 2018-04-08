@@ -30,7 +30,10 @@ namespace _DbEntities.Repository.Concrete
         {
             return _UserRepository.Get(x => x.Email == email);
         }
-
+        public void UpdateUser(ApplicationUser user)
+        {
+          _UserRepository.Updete(user);
+        }
 
 
     }

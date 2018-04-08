@@ -122,9 +122,8 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
             }
         }
         [HttpPost]
-        public new ActionResult Profile(EditProfileViewModel model, HttpPostedFileBase ProfilPictures)
+        public new async Task<ActionResult> Profile(EditProfileViewModel model, HttpPostedFileBase ProfilPictures)
         {
-
             if (model != null)
             {
                 if (ProfilPictures != null &&
@@ -139,27 +138,21 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                         {
                             System.IO.File.Delete(Server.MapPath("~/Content/images/" + model.ProfilPicture));
                         }
-
                     }
                     ProfilPictures.SaveAs(Server.MapPath($"~/Content/images/{filename}"));
                     model.ProfilPicture = filename;
-                   
-                    
-                    return View(model);
                 }
-                if (model.Password == model.ConfirmPassword && model.Password != null)
-                {
-
-                   var result =  Membership.Provider.ChangePassword(model.Email,model.CurrentPassword,model.Password);
-                 
-                    if (result==true)
-                    {
-                        ViewBag.result = "true";
-                    }
-                
-                }
-
             }
+            var applicationUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            applicationUser.PhoneNumber = model.PhoneNumber;
+            applicationUser.userInfo.About = model.About;
+            applicationUser.userInfo.Address = model.Address;
+            applicationUser.userInfo.CompanyInfo = model.CompanyInfo;
+            applicationUser.userInfo.ProfilPicture = model.ProfilPicture;
+            applicationUser.userInfo.Name = model.Name;
+            applicationUser.userInfo.SurName = model.SurName;
+            await UserManager.UpdateAsync(applicationUser);
+            ViewBag.result = true;
             return View(model);
 
 

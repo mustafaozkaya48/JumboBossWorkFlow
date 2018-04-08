@@ -21,13 +21,13 @@
     <!-- edit form column -->
     <div class="col-md-9 personal-info">
         @if (ViewBag.result != null)
-        {
-            <div class="alert alert-success alert-dismissable">
-                <a class="panel-close close" data-dismiss="alert">×</a>
-                <i class="fa fa-save"></i>
-                Prfil Bilgileriniz  <strong>Kaydedilmiştir.</strong>
-            </div>
-        }
+    {
+
+        <div class="alert alert-success">
+            <a class="panel-close close" data-dismiss="alert">×</a>
+            <span class="glyphicon glyphicon-floppy-saved"></span>  Profil bilgileriniz <strong>Güncellendi.</strong>
+        </div>
+}
 
         <h3>Profil Bilgileri</h3>
 
@@ -41,12 +41,13 @@
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="col-lg-3 control-label">Soyad</label>
                 <div class="col-lg-8">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    @Html.TextBoxFor(model => model.SurName, new { @class = "form-control", placeholder = "Soyadınızı giriniz", type = "text"  })
+                    @Html.TextBoxFor(model => model.SurName, new { @class = "form-control", placeholder = "Soyadınızı giriniz", type = "text" })
                     @Html.ValidationMessageFor(model => model.SurName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -79,7 +80,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label">Hakkımda</label>
+                <label class="col-md-3 control-label">Hakkımda</label>
                 <div class="col-lg-8">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.TextAreaFor(model => model.About, new { @class = "form-control", placeholder = "Bize Kendinizi anlatın", type = "text" })
@@ -94,42 +95,12 @@
                     @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="form-group">
-                <label class="col-md-3 control-label">Şifre</label>
-                <div class="col-lg-8">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(model => model.CurrentPassword, new { @class = "form-control", placeholder = "Şifre giriniz", type = "text" })
-                    @Html.ValidationMessageFor(model => model.CurrentPassword, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">Yeni Şifre</label>
-                <div class="col-lg-8">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifre giriniz", type = "text" })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">Yeni Şifre Tekrar</label>
-                <div class="col-lg-8">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Şifre Tekrar giriniz", type = "text" })
-                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label"></label>
-                <div class="col-md-8">
 
-                    <input class="btn btn-primary" type="submit" value="Kaydet">
-
-
-
-
-                    <span></span>
-
-                    <a href="~/WorkFlow/Panel/Home" class="btn btn-default">Vazgeç</a>
+                <div class="col-lg-3 pull-right">
+                    <input class="btn btn-success" type="submit" value="Kaydet">
+                    <a href="~/WorkFlow/Panel/Home" class="btn btn-danger">Vazgeç</a>
                 </div>
             </div>
         </form>

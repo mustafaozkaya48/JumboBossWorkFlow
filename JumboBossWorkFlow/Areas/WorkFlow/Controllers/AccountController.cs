@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Cryptography;
 using System.Text;
 using _DbEntities.Repository.Concrete;
+using _BusinessLayer.Helpers;
 
 namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 {
@@ -155,7 +156,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PasswordHash = model.Password, userInfo = new UserInfo { Name = model.Name, SurName = model.SurName, ProfilPicture = "User.png", CreatedOn = DateTime.Now }, PhoneNumber = model.PhoneNumber };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PasswordHash = model.Password, userInfo = new UserInfo { Name = model.Name, SurName = model.SurName, ProfilPicture = "User.png", CreatedOn = DateTime.Now,Department="Yönetici" }, PhoneNumber = model.PhoneNumber };
             UserRepository userRepository = new UserRepository();
             if (ModelState.IsValid)
             {
@@ -175,21 +176,18 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                     db.Roles.Add(new IdentityRole { Name = "Admin" });
                     db.SaveChanges();
                 }
-                if (user.Roles==null)
+                if (user.Roles!=null)
                 {
                     await this.UserManager.AddToRoleAsync(user.Id, role.Name);
                 }
-               
                 if (result.Succeeded)
                 {
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    //For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    //Send an email with this link
-                    //     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                    string ActivateUri = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    string body = $"<h1>Merhaba {model.Name+" "+model.SurName}</h1> <br /><br /><h2>Hesabınızı aktifleştirmek için <a href='{ActivateUri}' target='_blank'>Tıklayınız</a></h2>.";
+                    MailHelper.SendMail(body, model.Email, "Jumbo Boss Hesap Aktifleştrime");
                     return RedirectToAction("Home", "Panel", new { area = "WorkFlow" });
                 }
                 AddErrors(result);              
@@ -228,12 +226,24 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+          
+                    if (user!=null)
+                    {
+                        ViewBag.result = true;
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                    string ActivateUri = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    string body = $"<h1>Merhaba {model.Email + " " + model.Email}</h1> <br /><br /><h2>Şifrenizi Sıfırlamak için  <a href='{ActivateUri}' target='_blank'>Tıklayınız</a></h2>. <hr />İşlemi siz gerçekletişmediyseniz maili dikkate almayınız.";
+                    MailHelper.SendMail(body, model.Email, "Jumbo Boss Şifre Sıfılama");
                 }
-
+                    else
+                    {
+                        ViewBag.result = false;
+                    }
+                   
+                    return View("ForgotPassword");
+                
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
@@ -257,8 +267,9 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string userId,string code)
         {
+
             return code == null ? View("Error") : View();
         }
 
@@ -267,7 +278,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model,string UserId,string code)
         {
             if (!ModelState.IsValid)
             {
