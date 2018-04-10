@@ -36,39 +36,40 @@
                 {
      
                     @Html.AntiForgeryToken()
-                    <div id="login" class="animate form">
-                        <h1>Giriş Yap</h1>
+                <div id="login" class="animate form">
+                    <h1>Giriş Yap</h1>
 
 
-                        <p>
-                            <span class="glyphicon glyphicon-envelope"></span> <label for="username" class="uname">E-Posta </label>
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "E-Posta Adresinizi veya Telefon Numarası giriniz", type = "text" })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                        </p>
-                        <p>
-                            <span class="glyphicon glyphicon-user"></span> <label for="username" class="uname">Şifre</label>
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifre Giriniz", type = "password" })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                        </p>
+                    <p>
+                        <span class="glyphicon glyphicon-envelope"></span> <label for="username" class="uname">E-Posta </label>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "E-Posta Adresinizi veya Telefon Numarası giriniz", type = "text" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </p>
+                    <p>
+                        <span class="glyphicon glyphicon-user"></span> <label for="username" class="uname">Şifre</label>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifre Giriniz", type = "password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </p>
+                    <a href="~/WorkFlow/Account/ForgotPassword" class="">Şifremi Unuttum</a>
+                    <p class="signin button">
+                      
 
-                        <p class="signin button">
-                            @*<a href="~/WorkFlow/Users/Login" class="btn btn-lg btn-primary"><font color="white"><span class="glyphicon glyphicon-log-in"></span> Giriş Yap</font></a>*@
+                        <input type="submit" id="buttongiris" value="Giriş Yap" />
+                    </p>
 
-                            <input type="submit" id="buttongiris" value="Giriş Yap" />
-                        </p>
+                    <p class="login button">
+                        <a href="http://cookingfoodsworld.blogspot.in/" target="_blank"></a>
+                    </p>
 
-                        <p class="login button">
-                            <a href="http://cookingfoodsworld.blogspot.in/" target="_blank"></a>
-                        </p>
-                        <p class="change_link">
+                    <p class="change_link">
 
-                            Henüz üye değil misiniz ?
-                            <a id="buttongiris" href="~/WorkFlow/Account/Register" class="to_register">Kayıt Ol</a>
-                        </p>
+                        Henüz üye değil misiniz ?
+                        <a id="buttongiris" href="~/WorkFlow/Account/Register" class="to_register">Kayıt Ol</a>
+                    </p>
 
-                    </div>
+                </div>
 
 
                 }

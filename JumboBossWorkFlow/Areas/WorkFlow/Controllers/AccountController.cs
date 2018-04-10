@@ -269,8 +269,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string userId,string code)
         {
-
-            return code == null ? View("Error") : View();
+            return code == null ? View("Error") : View(new ResetPasswordViewModel {Email= UserManager.GetEmail(userId)});
         }
 
         //
@@ -278,7 +277,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model,string UserId,string code)
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -290,9 +289,11 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            var result = await UserManager.ResetPasswordAsync(user.Id, code, model.Password);
             if (result.Succeeded)
             {
+                await UserManager.UpdateSecurityStampAsync(user.Id);
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);
