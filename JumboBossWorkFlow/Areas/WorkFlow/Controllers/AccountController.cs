@@ -16,10 +16,11 @@ using System.Security.Cryptography;
 using System.Text;
 using _DbEntities.Repository.Concrete;
 using _BusinessLayer.Helpers;
+using _BusinessLayer;
 
 namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 {
-    [Authorize]
+    [Authorize,LogFilter]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -178,7 +179,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                 }
                 if (user.Roles!=null)
                 {
-                    await this.UserManager.AddToRoleAsync(user.Id, role.Name);
+                    await this.UserManager.AddToRoleAsync(user.Id, "Admin");
                 }
                 if (result.Succeeded)
                 {

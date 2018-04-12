@@ -50,6 +50,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\JumboBossWorkFlow\JumboBossWorkFlow\bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,7 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Helpers\FileDownloads.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
+    <Compile Include="LogFilters.cs" />
     <Compile Include="Messages\ErrorMessagesCode.cs" />
     <Compile Include="Messages\InfoMessageCode.cs" />
     <Compile Include="Messages\MessageObj\ErrorMsgObj.cs" />

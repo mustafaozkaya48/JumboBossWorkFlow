@@ -13,7 +13,7 @@ namespace JumboBossWorkFlow.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201803251941000_userInfo"; }
+            get { return "201804111521389_userInfo"; }
         }
         
         string IMigrationMetadata.Source

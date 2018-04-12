@@ -63,15 +63,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Logs.cs" />
+    <Compile Include="Models\ViewModel\AddWorkViewModel.cs" />
+    <Compile Include="Models\ViewModel\ManageViewModels.cs" />
+    <Compile Include="Models\WorkAddition.cs" />
+    <Compile Include="Models\WorkCommenteds.cs" />
+    <Compile Include="Models\Works.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Abstract\IRepository.cs" />
     <Compile Include="Repository\Abstract\IUnitOfWork.cs" />
     <Compile Include="Repository\Concrete\EFRepository.cs" />
     <Compile Include="Repository\Concrete\EFUnitOfWork.cs" />
     <Compile Include="Repository\Concrete\UserRepository.cs" />
+    <Compile Include="Models\Workflow.cs" />
+    <Compile Include="Repository\Concrete\WorkRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

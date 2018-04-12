@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -24,6 +26,17 @@ namespace _DbEntities.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Works> Works { get; set; }
+        public DbSet<WorkAddition> WorksAddition { get; set; }
+        //public DbSet<WorkEmployeeUsers> WorkEmployeeUsers { get; set; }
+        public DbSet<Logs> Logs { get; set; }
+        public DbSet<WorkCommenteds> WorkCommenteds { get; set; }
+        public DbSet<Workflow> Workflow { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -54,9 +67,10 @@ namespace _DbEntities.Models
 
         [Column(TypeName = "VARCHAR")]
         public string ProfilPicture { get; set; }
-        [Column(TypeName = "VARCHAR"),StringLength(25)]
+        [Column(TypeName = "VARCHAR"), StringLength(25)]
         public string Department { get; set; }
         public DateTime CreatedOn { get; set; }
+        public string DependencyId { get; set; }
     }
 
 

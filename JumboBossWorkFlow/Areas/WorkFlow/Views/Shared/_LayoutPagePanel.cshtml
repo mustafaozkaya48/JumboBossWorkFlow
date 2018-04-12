@@ -1,10 +1,9 @@
 ﻿@using Microsoft.AspNet.Identity
 @using _DbEntities.Models
 @{
-    ApplicationDbContext applicationDb = new ApplicationDbContext();
-    string userId = User.Identity.GetUserId();
-    ApplicationUser currentUser = applicationDb.Users.FirstOrDefault(x => x.Id == userId);
-
+        ApplicationDbContext applicationDb = new ApplicationDbContext();
+        string userId = User.Identity.GetUserId();
+        ApplicationUser currentUser = applicationDb.Users.FirstOrDefault(x => x.Id == userId);
 }
 <!DOCTYPE html>
 <html lang="tr">
@@ -38,7 +37,9 @@
     <link rel="stylesheet" href="~/Content/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="~/Content/plugins/iCheck/all.css">
-
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
@@ -80,7 +81,6 @@
                                             <!-- start message -->
                                             <a href="#">
                                                 <div class="pull-left">
-                                                   
                                                     <img src="~/Content/images/@currentUser.userInfo.ProfilPicture" class="img-circle" alt="User Image">
                                                 </div>
                                                 <h4>
@@ -273,7 +273,7 @@
         </aside>
         <!-- =============================================== -->
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background:#fff">
             @RenderBody()
         </div>
         <!-- /.content-wrapper -->

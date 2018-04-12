@@ -1,6 +1,7 @@
 ﻿using _DbEntities.Models;
 using _DbEntities.Repository.Abstract;
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace _DbEntities.Repository.Concrete
 {
@@ -20,6 +21,11 @@ namespace _DbEntities.Repository.Concrete
         { 
                 
             return _UserRepository.Get(x => x.Email == model.Email);
+        }
+        public List<ApplicationUser> GetUserList()
+        {
+
+            return _UserRepository.GetAll().ToList();
         }
 
         public ApplicationUser GetUserById(string id)

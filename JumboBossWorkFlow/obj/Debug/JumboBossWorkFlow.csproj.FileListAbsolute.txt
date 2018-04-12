@@ -71,8 +71,6 @@ C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\bin\Microsoft.
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\bin\Microsoft.AI.Web.xml
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.csprojResolveAssemblyReference.cache
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.Migrations.userInfo.resources
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.csproj.GenerateResource.Cache
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.csproj.CoreCompileInputs.cache
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.dll
 C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.pdb
@@ -315,3 +313,5 @@ C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\JumboBossWorkFlow\bin\_BusinessLayer.
 C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\JumboBossWorkFlow\bin\_DbEntities.dll.config
 C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.csproj.CoreCompileInputs.cache
 C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.csproj.CopyComplete
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.Migrations.userInfo.resources
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\JumboBossWorkFlow\obj\Debug\JumboBossWorkFlow.csproj.GenerateResource.Cache

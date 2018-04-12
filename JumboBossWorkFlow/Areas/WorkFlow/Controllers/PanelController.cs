@@ -1,9 +1,12 @@
 ﻿using _BusinessLayer;
 using _DbEntities.Models;
+using _DbEntities.Models.ViewModel;
+using _DbEntities.Repository.Concrete;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -75,9 +78,39 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 
         public ActionResult AddBusiness()
         {
-            return View();
+            AddWorkViewModel model = new AddWorkViewModel();
+            UserRepository userRepository = new UserRepository();
+            model.Users = userRepository.GetUserList();
+            return View(model);
         }
+        [HttpPost]
+        public ActionResult AddBusiness(AddWorkViewModel model,string EmployeeUsers,HttpPostedFileBase[] files)
+        {
 
+            UserRepository userRepository = new UserRepository();
+            ApplicationUser EmployeeUserModel = userRepository.GetUserById(EmployeeUsers);
+
+            //Ensure model state is valid  
+            //iterating through multiple file collection   
+                foreach (HttpPostedFileBase file in files)
+                {
+                    //Checking file is available to save.  
+                    if (file != null)
+                    {
+                        if (!Directory.Exists(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{EmployeeUserModel.Email}")))
+                            Directory.CreateDirectory(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{EmployeeUserModel.Email}"));
+                        var InputFileName = Path.GetFileName(file.FileName);
+                        var ServerSavePath = Path.Combine(Server.MapPath($"~/Content/UploadedFiles/{EmployeeUserModel.Email}/") + InputFileName);
+                        //Save file to server folder  
+                        file.SaveAs(ServerSavePath);
+                        //assigning file uploaded status to ViewBag for showing message to user.  
+                        ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
+                    }
+
+               }
+            
+            return View(model);
+        }
         public ActionResult MyWorks()
         {
             return View();
@@ -161,7 +194,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 
         }
 
+       
 
-        
     }
 }
