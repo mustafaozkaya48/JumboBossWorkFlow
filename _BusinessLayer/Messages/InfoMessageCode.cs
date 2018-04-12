@@ -10,6 +10,8 @@ namespace _BusinessLayer.Messages
     {
         CheckMail = 100,
         EditProfil=101,
-        RegisterSuccess=102
+        RegisterSuccess=102,
+        AddWorkSuccess = 103
+
     }
 }

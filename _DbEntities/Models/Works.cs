@@ -17,12 +17,11 @@ namespace _DbEntities.Models
 
         [Required]
         public DateTime UpdateDateTime { get; set; }
-        public string RequestingUserId { get; set; }
         [Required]
-        [ForeignKey("RequestingUserId")]
         public virtual ApplicationUser RequestingUser { get; set; }
         [Required]
         public virtual ApplicationUser EmployeeUser{ get; set; }
+
         public virtual ICollection<WorkAddition> Addition { get; set; }
 
         [Column(TypeName = "VARCHAR")]

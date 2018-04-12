@@ -12,9 +12,7 @@ namespace _DbEntities.Models
     {
         [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        [Required]
         public virtual Works Work { get; set; }
-        [Required]
         [Column(TypeName = "VARCHAR")]
         public string Filename { get; set; }
         public string FilePath { get; set; }

@@ -26,6 +26,11 @@ namespace _DbEntities.Repository.Concrete
             _dbSet.Remove(entity);
         }
 
+        public T Find(T entity)
+        {
+            return _dbSet.Find(entity);
+        }
+
         public T Get(Expression<Func<T, bool>> where)
         {
            return _dbSet.Where(where).SingleOrDefault();

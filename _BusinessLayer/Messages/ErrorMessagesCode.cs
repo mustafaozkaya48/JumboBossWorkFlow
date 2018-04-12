@@ -11,7 +11,8 @@
         ActivateIdDoesNotExists = 204,
         //user Register - Login Error KEY
         Thereisaproblem = 205,
-        ProfileCouldNotUpdated=206
+        ProfileCouldNotUpdated=206,
+        AddWorkError=207    
 
 
     }

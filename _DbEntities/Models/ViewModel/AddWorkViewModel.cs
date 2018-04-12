@@ -14,7 +14,7 @@ namespace _DbEntities.Models.ViewModel
         public List<ApplicationUser> Users { get; set; }
         public string EmployeeUsers { get; set; }
         public FileModel FileModel { get; set; }
-
+        public Works Works { get; set; }
 
     }
     public class FileModel

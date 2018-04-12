@@ -20,5 +20,6 @@ namespace _DbEntities.Repository.Abstract
         void Delete(T entity);
         void Delete(int id);
         void Updete(T entity);
+        T Find(T entity);
     }
 }

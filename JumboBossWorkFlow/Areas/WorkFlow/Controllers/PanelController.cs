@@ -86,29 +86,41 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         [HttpPost]
         public ActionResult AddBusiness(AddWorkViewModel model,string EmployeeUsers,HttpPostedFileBase[] files)
         {
-
+            Works _Work = new Works();
             UserRepository userRepository = new UserRepository();
-            ApplicationUser EmployeeUserModel = userRepository.GetUserById(EmployeeUsers);
+            WorkRepository workRepository = new WorkRepository();
+            WorkBusiness workBusiness = new WorkBusiness();
+            List<WorkAddition> workAddition = new List<WorkAddition>();
+            _BusinessLayer<Works> work_layer = new _BusinessLayer<Works>();
+            WorkAdditionRepository workAdditionRepository = new WorkAdditionRepository();
+            //  _Work = model.Works; //View Modelden gelen bilgiler iş modeline aktarıldı B
+            _Work = model.Works; //View Modelden gelen bilgiler iş modeline aktarıldı B
+            _Work.EmployeeUser = userRepository.GetUserById(EmployeeUsers); //Seçilen Görevli id ile bulundu ve iş modeline atıldı B
+            _Work.RequestingUser = userRepository.GetUserById(User.Identity.GetUserId());//  work_layer = workBusiness.AddWorks(_Work); // iş eklendi geri alınıp atandı.
+            work_layer = workBusiness.AddWorks(_Work); // iş eklendi geri alınıp atandı.
 
-            //Ensure model state is valid  
-            //iterating through multiple file collection   
-                foreach (HttpPostedFileBase file in files)
+            foreach (HttpPostedFileBase file in files)
                 {
                     //Checking file is available to save.  
                     if (file != null)
                     {
-                        if (!Directory.Exists(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{EmployeeUserModel.Email}")))
-                            Directory.CreateDirectory(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{EmployeeUserModel.Email}"));
+                        if (!Directory.Exists(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{_Work.EmployeeUser.Email}")))
+                            Directory.CreateDirectory(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{_Work.EmployeeUser.Email}"));
                         var InputFileName = Path.GetFileName(file.FileName);
-                        var ServerSavePath = Path.Combine(Server.MapPath($"~/Content/UploadedFiles/{EmployeeUserModel.Email}/") + InputFileName);
+                        var ServerSavePath = Path.Combine(Server.MapPath($"~/Content/UploadedFiles/{_Work.EmployeeUser.Email}/") + InputFileName);
                         //Save file to server folder  
                         file.SaveAs(ServerSavePath);
                         //assigning file uploaded status to ViewBag for showing message to user.  
                         ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
+                    workAddition.Add(new WorkAddition { Filename = InputFileName,FilePath=ServerSavePath,Work=work_layer.Result});
                     }
-
+                 
                }
+            if (workAddition.Count>0)
+            {
+             //   workAdditionRepository.AddWorkAddition(workAddition);
             
+            }
             return View(model);
         }
         public ActionResult MyWorks()

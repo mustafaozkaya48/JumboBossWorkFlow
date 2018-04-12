@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ValueObj\AddWork.cs" />
     <Compile Include="Models\ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Logs.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Repository\Concrete\EFUnitOfWork.cs" />
     <Compile Include="Repository\Concrete\UserRepository.cs" />
     <Compile Include="Models\Workflow.cs" />
+    <Compile Include="Repository\Concrete\WorkAdditionRepository .cs" />
     <Compile Include="Repository\Concrete\WorkRepository.cs" />
   </ItemGroup>
   <ItemGroup>

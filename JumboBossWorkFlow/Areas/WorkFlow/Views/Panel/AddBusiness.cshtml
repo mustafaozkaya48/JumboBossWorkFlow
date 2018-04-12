@@ -143,6 +143,7 @@
                                     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
                                     <div class="container bootstrap snippet">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="main-box no-header clearfix">
@@ -160,31 +161,31 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     @foreach (var item in Model.Users)
-                                                                    {
-                                                                     <tr>
-                                                                     
-                                                                         <td style="display:none">
-                                                                             @item.Id
-                                                                         </td>
-                                                                         <td>
-                                                                     
-                                                                             <img src="~/Content/images/@item.userInfo.ProfilPicture" alt="">
-                                                                             @if (item.UserName == User.Identity.Name)
-                                                                             {
-                                                                                 <span class="user-link">@item.userInfo.Name (Ben)</span>
-                                                                             }
-                                                                             else
-                                                                             {
-                                                                                 <span class="user-link">@item.userInfo.Name </span>
-                                                                             }
-                                                                             <span class="user-subhead">@item.userInfo.Department</span>
-                                                                         </td>
-                                                                     
-                                                                         <td class="text-center">
-                                                                             <span class="label label-default">@item.userInfo.Department</span>
-                                                                         </td>
-                                                                     </tr>
-                                                                    }
+                                {
+                                    <tr>
+
+                                        <td style="display:none">
+                                            @item.Id
+                                        </td>
+                                        <td>
+
+                                            <img src="~/Content/images/@item.userInfo.ProfilPicture" alt="">
+                                            @if (item.UserName == User.Identity.Name)
+        {
+                                    <span class="user-link">@item.userInfo.Name (Ben)</span>
+}
+else
+{
+                                    <span class="user-link">@item.userInfo.Name </span>
+}
+                                            <span class="user-subhead">@item.userInfo.Department</span>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <span class="label label-default">@item.userInfo.Department</span>
+                                        </td>
+                                    </tr>
+}
 
 
                                                                 </tbody>
@@ -241,12 +242,15 @@
                                             <h3 class="text-center">İş Detayları</h3>
                                         </div>
                                         <div class="box-body">
-                                            <input class="form-control input-lg" type="text" placeholder="İş Başlığı">
+                                            @Html.TextBoxFor(model => model.Works.WorkTitle, new { @class = "form-control input-lg", placeholder = "İş Başlığı", type = "text" })
+                                            @Html.ValidationMessageFor(model => model.Works.WorkTitle, "", new { @class = "text-danger" })
                                             <br>
-                                            <textarea class="form-control" type="text" placeholder="İş Açıklamaası" rows="3"></textarea>
+                                            @Html.TextAreaFor(model => model.Works.WorkDescription, new { @class = "form-control", placeholder = "İş Açıklamaası", type = "text", rows = "3" })
+                                            @Html.ValidationMessageFor(model => model.Works.WorkDescription, "", new { @class = "text-danger" })
                                             <br>
                                             Tamamlanma Tarihi
-                                            <input class="form-control input-sm" type="datetime-local">
+                                            @Html.TextBoxFor(model => model.Works.WorkTitle, new { @class = "form-control input-lg",  type = "datetime-local" })
+                                            @Html.ValidationMessageFor(model => model.Works.WorkTitle, "", new { @class = "text-danger" })
                                         </div>
                                         <!-- /.box-body -->
                                     </div>
