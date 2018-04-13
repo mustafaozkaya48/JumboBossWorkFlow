@@ -19,7 +19,7 @@ namespace _BusinessLayer
         {
             try
             {
-                _work_layer.Result = model;
+                
                 model.Works.EmployeeUser_Id = EmployeeUsers;
                 model.Works.RequestingUser_Id = RequestingUser;
                 model.Works.CreateDateTime = DateTime.Now;
@@ -30,14 +30,12 @@ namespace _BusinessLayer
                 }
                 if (model.Works.WorkTitle!=null&&model.Works.EmployeeUser_Id!=null&& model.Works.WorkDescription!=null&& model.Works.WorkDateTime!=null)
                 {
+                    _work_layer.Result = model;
                     int result = workRepository.AddWork(model.Works);
-                  
+                    
                     if (result > 0)
                     {
                         _work_layer.AddInfo(Messages.InfoMessageCode.AddWorkSuccess, "İş Eklendi.");
-                        
-                        _work_layer.Result.Users = userRepository.GetUserListDependencyId(RequestingUser);//Üyeliğe bağlı alt üyeler çağırıldı
-                        _work_layer.Result.Me = userRepository.GetUserById(RequestingUser);
                         return _work_layer;
                     }
                 }
@@ -52,8 +50,7 @@ namespace _BusinessLayer
             catch (Exception ex)
             {
 
-                _work_layer.Result.Users = userRepository.GetUserListDependencyId(RequestingUser);//Üyeliğe bağlı alt üyeler çağırıldı
-                _work_layer.Result.Me = userRepository.GetUserById(RequestingUser);
+
                 _work_layer.Result = model;
                 _work_layer.AddError(Messages.ErrorMessagesCode.AddWorkError, ex.Message);
                 return _work_layer;

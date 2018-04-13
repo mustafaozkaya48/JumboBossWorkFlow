@@ -1,6 +1,6 @@
 ﻿@model _DbEntities.Models.ViewModel.AddWorkViewModel
 @{
-    ViewBag.Title = "AddBusiness";
+    ViewBag.Title = "İş Ekle";
     Layout = "~/Areas/WorkFlow/Views/Shared/_LayoutPagePanel.cshtml";
 }
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -9,20 +9,12 @@
 <!------ Include the above in your HEAD tag ---------->
 <link href="~/Content/Styles/dist/css/AddWork.css" rel="stylesheet" />
 
-@using (Html.BeginForm("AddBusiness", "Panel", Model, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddBusiness", "Panel", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
     <div class="container">
         <div class="row">
-            <style type="text/css">
-                .validation-summary-errors li {
-                    list-style: none;
-                    margin: 0;
-                    font-size: 15px;
-                    font-style: oblique;
-                    padding: 5px -10px 5px 0px;
-                }
-            </style>
+
             @if (ViewBag.result == false)
             {
                 <br />
@@ -33,9 +25,10 @@
                 <br />
                 <div class="alert alert-success" role="alert">
                     <strong>İş Eklendi.</strong> Artık işlerim sekmesinde görtüleye bilirisiniz. Şimdi yeni bir iş ekleyebilirisin.
-                    
+
                 </div>
             }
+            <div id="Yukleniyor" class="alert alert-warning" style="display:none">Yükleniyor...</div>
             <section>
 
                 <div class="wizard">
@@ -43,7 +36,7 @@
                         <div class="connecting-line"></div>
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Görevlileri Belirle">
+                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Görevli Belirle">
                                     <span class="round-tab">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </span>
@@ -57,9 +50,9 @@
                                 </a>
                             </li>
                             <li role="presentation" class="disabled">
-                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="İş Ekleri">
                                     <span class="round-tab">
-                                        <i class="glyphicon glyphicon-picture"></i>
+                                        <i class="glyphicon glyphicon-folder-open"></i>
                                     </span>
                                 </a>
                             </li>
@@ -76,94 +69,8 @@
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="step1">
                                 <div class="step1">
-                                    <style>
-                                        body {
-                                            background: #eee;
-                                        }
 
-                                        .main-box.no-header {
-                                            padding-top: 20px;
-                                        }
 
-                                        .main-box {
-                                            background: #FFFFFF;
-                                            -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
-                                            -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
-                                            -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
-                                            -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
-                                            box-shadow: 1px 1px 2px 0 #CCCCCC;
-                                            margin-bottom: 16px;
-                                            -webikt-border-radius: 3px;
-                                            -moz-border-radius: 3px;
-                                            border-radius: 3px;
-                                        }
-
-                                        .table a.table-link.danger {
-                                            color: #e74c3c;
-                                        }
-
-                                        .label {
-                                            border-radius: 3px;
-                                            font-size: 0.875em;
-                                            font-weight: 600;
-                                        }
-
-                                        .user-list tbody td .user-subhead {
-                                            font-size: 0.875em;
-                                            font-style: italic;
-                                        }
-
-                                        .user-list tbody td .user-link {
-                                            display: block;
-                                            font-size: 1.25em;
-                                            padding-top: 3px;
-                                            margin-left: 60px;
-                                        }
-
-                                        a {
-                                            color: #3498db;
-                                            outline: none !important;
-                                        }
-
-                                        .user-list tbody td > img {
-                                            position: relative;
-                                            max-width: 50px;
-                                            float: left;
-                                            margin-right: 15px;
-                                        }
-
-                                        .table thead tr th {
-                                            text-transform: uppercase;
-                                            font-size: 0.875em;
-                                        }
-
-                                        .table thead tr th {
-                                            border-bottom: 2px solid #e7ebee;
-                                        }
-
-                                        .table tbody tr td:first-child {
-                                            font-size: 1.125em;
-                                            font-weight: 300;
-                                        }
-
-                                        .table tbody tr td {
-                                            font-size: 0.875em;
-                                            vertical-align: middle;
-                                            border-top: 1px solid #e7ebee;
-                                            padding: 12px 8px;
-                                        }
-                                    </style>
-                                    <script>
-                                        $(document).ready(function () {
-                                            $("#myInput").on("keyup", function () {
-                                                var value = $(this).val().toLowerCase();
-                                                $("#table tr").filter(function () {
-                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                                                });
-                                            });
-                                        });
-
-                                    </script>
                                     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
                                     <div class="container bootstrap snippet">
@@ -186,7 +93,7 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td style="display:none">
-                                                                           @Model.Me.Id
+                                                                            @Model.Me.Id
                                                                         </td>
                                                                         <td>
                                                                             <img src="~/Content/images/@Model.Me.userInfo.ProfilPicture" alt="">
@@ -201,26 +108,26 @@
 
                                                                     @foreach (var item in Model.Users)
                                                                     {
-                                                                  
-                                                                            <tr>
 
-                                                                                <td style="display:none">
-                                                                                    @item.Id
-                                                                                </td>
-                                                                                <td class="text-center">
+                                                                        <tr>
 
-                                                                                    <img src="~/Content/images/@item.userInfo.ProfilPicture" alt="">
-                                                                                    <span class="user-subhead">@item.userInfo.Department</span>
-                                                                                </td>
-                                                                                <td> <span class="user-link">@item.userInfo.Name @item.userInfo.SurName</span></td>
+                                                                            <td style="display:none">
+                                                                                @item.Id
+                                                                            </td>
+                                                                            <td class="text-center">
 
-                                                                                <td class="text-center">
-                                                                                    <span class="label label-default">@item.userInfo.Department</span>
-                                                                                </td>
-                                                                            </tr>
-                                                                     }
+                                                                                <img src="~/Content/images/@item.userInfo.ProfilPicture" alt="">
+                                                                                <span class="user-subhead">@item.userInfo.Department</span>
+                                                                            </td>
+                                                                            <td> <span class="user-link">@item.userInfo.Name @item.userInfo.SurName</span></td>
 
-                                                                    
+                                                                            <td class="text-center">
+                                                                                <span class="label label-default">@item.userInfo.Department</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    }
+
+
 
 
                                                                 </tbody>
@@ -232,41 +139,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <style>
-                                    .selected {
-                                        background-color: deepskyblue;
-                                        font-weight: bold
-                                    }
-                                </style>
-                                <script>
-                                    function selectedRow() {
 
-                                        var index, table = document.getElementById("table");
-
-                                        for (var i = 1; i < table.rows.length; i++) {
-                                            table.rows[i].onclick = function () {
-                                                // remove the background from the previous selected row
-                                                if (typeof index !== "undefined") {
-                                                    table.rows[index].classList.toggle("selected");
-                                                }
-                                                // get the selected row index
-                                                index = this.rowIndex;
-                                                // add class selected to the row
-                                                this.classList.toggle("selected");
-                                                document.getElementById("EmployeeUsers").value = this.cells[0].innerHTML.trim();
-                                            };
-                                        }
-
-                                    }
-                                    selectedRow();
-
-
-                                </script>
                                 @Html.TextBoxFor(m => m.EmployeeUsers, new { type = "hidden" })
 
                                 <ul class="list-inline pull-right">
 
-                                    <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-lg next-step">Bir Sonraki Adım</button></li>
                                 </ul>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="step2">
@@ -290,10 +168,9 @@
                                         <!-- /.box-body -->
                                     </div>
                                 </div>
-
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                    <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                    <li><button type="button" class="btn btn-default btn-lg prev-step">Geri</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-lg next-step">Bir Sonraki Adım</button></li>
                                 </ul>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="step3">
@@ -319,16 +196,16 @@
                                     </div>
                                 </div>
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                    <li><button type="button" class="btn btn-default next-step">Skip</button></li>
-                                    <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                                    <li><button type="button" class="btn btn-default btn-lg prev-step">Geri</button></li>
+                                    <li><button type="button" class="btn btn-default btn-lg next-step">Geç</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-lg btn-info-full next-step">Bir Sonraki Adım</button></li>
+                                 
                                 </ul>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="complete">
-                                <div class="step44">
+                                <div class="step44" id="list">
                                     <h5>Completed</h5>
                                     <button type="submit">Kaydet</button>
-
                                 </div>
                             </div>
                             <div class="clearfix"></div>
@@ -343,7 +220,7 @@
 
         document.getElementById('files').addEventListener('change', function () {
             var totalsize = 0;
-            var i = 0;
+            var j = 0;
             for (var i = 0; i < this.files.length; i++) {
                 var file = this.files[i];
                 var totalsize = totalsize + file.size;
@@ -365,9 +242,9 @@
                     var cell = row.insertCell(3);
                     cell.innerHTML = "<td>" + file.type + "</td>";
                     var totalsize = totalsize + file.size;
-                    i++;
+                    j++;
                 }
-                var row = table.insertRow(i + 1);
+                var row = table.insertRow(j + 1);
                 var cell = row.insertCell(0);
                 cell.innerHTML = "<td></td>";
                 var cell = row.insertCell(1);
@@ -409,4 +286,131 @@
             });
         });
     </script>
+    <style>
+        .selected {
+            background-color: deepskyblue;
+            font-weight: bold
+        }
+    </style>
+    <script>
+        function selectedRow() {
+
+            var index, table = document.getElementById("table");
+
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].onclick = function () {
+                    // remove the background from the previous selected row
+                    if (typeof index !== "undefined") {
+                        table.rows[index].classList.toggle("selected");
+                    }
+                    // get the selected row index
+                    index = this.rowIndex;
+                    // add class selected to the row
+                    this.classList.toggle("selected");
+                    document.getElementById("EmployeeUsers").value = this.cells[0].innerHTML.trim();
+                };
+            }
+
+        }
+        selectedRow();
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+    </script>
+    <style type="text/css">
+        .validation-summary-errors li {
+            list-style: none;
+            margin: 0;
+            font-size: 15px;
+            font-style: oblique;
+            padding: 5px -10px 5px 0px;
+        }
+    </style>
+    <style>
+        body {
+            background: #eee;
+        }
+
+        .main-box.no-header {
+            padding-top: 20px;
+        }
+
+        .main-box {
+            background: #FFFFFF;
+            -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            box-shadow: 1px 1px 2px 0 #CCCCCC;
+            margin-bottom: 16px;
+            -webikt-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        .table a.table-link.danger {
+            color: #e74c3c;
+        }
+
+        .label {
+            border-radius: 3px;
+            font-size: 0.875em;
+            font-weight: 600;
+        }
+
+        .user-list tbody td .user-subhead {
+            font-size: 0.875em;
+            font-style: italic;
+        }
+
+        .user-list tbody td .user-link {
+            display: block;
+            font-size: 1.25em;
+            padding-top: 3px;
+            margin-left: 60px;
+        }
+
+        a {
+            color: #3498db;
+            outline: none !important;
+        }
+
+        .user-list tbody td > img {
+            position: relative;
+            max-width: 50px;
+            float: left;
+            margin-right: 15px;
+        }
+
+        .table thead tr th {
+            text-transform: uppercase;
+            font-size: 0.875em;
+        }
+
+        .table thead tr th {
+            border-bottom: 2px solid #e7ebee;
+        }
+
+        .table tbody tr td:first-child {
+            font-size: 1.125em;
+            font-weight: 300;
+        }
+
+        .table tbody tr td {
+            font-size: 0.875em;
+            vertical-align: middle;
+            border-top: 1px solid #e7ebee;
+            padding: 12px 8px;
+        }
+    </style>
 }

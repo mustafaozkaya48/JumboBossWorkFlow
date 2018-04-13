@@ -89,48 +89,54 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         {
             _BusinessLayer<AddWorkViewModel> work_layer = new _BusinessLayer<AddWorkViewModel>();
             UserRepository userRepository = new UserRepository();
-            WorkBusiness workBusiness = new WorkBusiness();
-            List<WorkAddition> additionlist = new List<WorkAddition>();
-            work_layer = workBusiness.AddWorks(model,EmployeeUsers, User.Identity.GetUserId()); // iş eklendi geri alınıp atandı.
-            foreach (HttpPostedFileBase file in files)
+            if (ModelState.IsValid)
             {
-                //Checking file is available to save.  
-                if (file != null)
+
+
+                WorkBusiness workBusiness = new WorkBusiness();
+                List<WorkAddition> additionlist = new List<WorkAddition>();
+                work_layer = workBusiness.AddWorks(model, EmployeeUsers, User.Identity.GetUserId()); // iş eklendi geri alınıp atandı.
+                foreach (HttpPostedFileBase file in files)
                 {
-                    if (!Directory.Exists(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}")))
-                        Directory.CreateDirectory(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}"));
-                    var InputFileName = Path.GetFileName(file.FileName);
-                    var ServerSavePath = Path.Combine(Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}/") + InputFileName);
-                    //Save file to server folder  
-                    file.SaveAs(ServerSavePath);
-                    //assigning file uploaded status to ViewBag for showing message to user.  
-                    ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
-                    try
+                    //Checking file is available to save.  
+                    if (file != null)
                     {
-                    additionlist.Add(new WorkAddition { Filename = InputFileName, FilePath = userRepository.GetUserById(EmployeeUsers).Email+"/"+InputFileName , Work_Id = work_layer.Result.Works.Id});
+                        if (!Directory.Exists(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}")))
+                            Directory.CreateDirectory(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}"));
+                        var InputFileName = Path.GetFileName(file.FileName);
+                        var ServerSavePath = Path.Combine(Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}/") + InputFileName);
+                        //Save file to server folder  
+                        file.SaveAs(ServerSavePath);
+                        //assigning file uploaded status to ViewBag for showing message to user.  
+                        ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
+                        additionlist.Add(new WorkAddition { Filename = InputFileName, FilePath = userRepository.GetUserById(EmployeeUsers).Email + "/" + InputFileName, Work_Id = work_layer.Result.Works.Id });
+
+
+
                     }
-                    catch (Exception)
+                }
+                foreach (var item in work_layer.Info)
+                {
+                    if (item.InfoCode == _BusinessLayer.Messages.InfoMessageCode.AddWorkSuccess)
                     {
-
-                        throw;
+                        workBusiness.AddWorkAddition(additionlist);
+                        ViewBag.result = true;
                     }
+                }
+                foreach (var item in work_layer.Errors)
+                {
 
-
+                    ModelState.AddModelError("", item.Message);
+                    ViewBag.result = false;
                 }
             }
-            foreach (var item in work_layer.Info)
+            else
             {
-                if (item.InfoCode==_BusinessLayer.Messages.InfoMessageCode.AddWorkSuccess)
-                {
-                    workBusiness.AddWorkAddition(additionlist);
-                    ViewBag.result = true;
-                }
-            }
-            foreach (var item in work_layer.Errors)
-            {
-                ModelState.AddModelError("",item.Message);
+
                 ViewBag.result = false;
             }
+            model.Users = userRepository.GetUserListDependencyId(User.Identity.GetUserId());//Üyeliğe bağlı alt üyeler çağırıldı
+            model.Me = userRepository.GetUserById(User.Identity.GetUserId());
             return View(model);
         }
 
