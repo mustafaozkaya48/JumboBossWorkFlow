@@ -8,7 +8,7 @@ namespace _DbEntities.Models.ValueObj
 {
     public class AddWork
     {
-        public Works Works { get; set; }
+        public Work Work { get; set; }
         public WorkAddition WorkAddition { get; set; }
         public Workflow Workflow { get; set; }
 

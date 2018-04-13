@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 
 namespace _DbEntities.Models
 {
-   public class WorkAddition
+    public partial class WorkAddition
     {
         [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public virtual Works Work { get; set; }
-        [Column(TypeName = "VARCHAR")]
+
         public string Filename { get; set; }
+
         public string FilePath { get; set; }
+
+        public Guid Work_Id { get; set; }
+        [ForeignKey("Work_Id")]
+        public virtual Work Work { get; set; }
     }
 }

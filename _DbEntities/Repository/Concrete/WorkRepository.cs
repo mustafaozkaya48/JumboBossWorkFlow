@@ -11,27 +11,27 @@ namespace _DbEntities.Repository.Concrete
 {
     public class WorkRepository
     {
-        private IRepository<Works> _WorkRepository;
+        private IRepository<Work> _WorkRepository;
         private IUnitOfWork _WorkUnitofWork;
         private ApplicationDbContext _dbContext;
         public WorkRepository()
         {
             _dbContext = new ApplicationDbContext();
-            _WorkRepository = new EFRepository<Works>(_dbContext);
+            _WorkRepository = new EFRepository<Work>(_dbContext);
             _WorkUnitofWork = new EFUnitOfWork(_dbContext);
         }
-        public int AddWork(Works entity) {
-           _WorkRepository.Insert(entity);
+        public int AddWork(Work entity) {
+            _WorkRepository.Insert(entity);
             return _WorkUnitofWork.SaveChanges();
 
         }
-        public int WorkUpdate(Works entity)
+        public int WorkUpdate(Work entity)
         {
             _WorkRepository.Updete(entity);
             return _WorkUnitofWork.SaveChanges();
 
         }
-        public Works GetWork(Works entity)
+        public Work GetWork(Work entity)
         {
            
             return _WorkRepository.Find(entity);

@@ -80,49 +80,60 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         {
             AddWorkViewModel model = new AddWorkViewModel();
             UserRepository userRepository = new UserRepository();
-            model.Users = userRepository.GetUserList();
+            model.Me = userRepository.GetUserById(User.Identity.GetUserId());
+            model.Users = userRepository.GetUserListDependencyId(User.Identity.GetUserId());//Üyeliğe bağlı alt üyeler çağırıldı
             return View(model);
         }
         [HttpPost]
-        public ActionResult AddBusiness(AddWorkViewModel model,string EmployeeUsers,HttpPostedFileBase[] files)
+        public ActionResult AddBusiness(AddWorkViewModel model, string EmployeeUsers, HttpPostedFileBase[] files)
         {
-            Works _Work = new Works();
+            _BusinessLayer<AddWorkViewModel> work_layer = new _BusinessLayer<AddWorkViewModel>();
             UserRepository userRepository = new UserRepository();
-            WorkRepository workRepository = new WorkRepository();
             WorkBusiness workBusiness = new WorkBusiness();
-            List<WorkAddition> workAddition = new List<WorkAddition>();
-            _BusinessLayer<Works> work_layer = new _BusinessLayer<Works>();
-            WorkAdditionRepository workAdditionRepository = new WorkAdditionRepository();
-            //  _Work = model.Works; //View Modelden gelen bilgiler iş modeline aktarıldı B
-            _Work = model.Works; //View Modelden gelen bilgiler iş modeline aktarıldı B
-            _Work.EmployeeUser = userRepository.GetUserById(EmployeeUsers); //Seçilen Görevli id ile bulundu ve iş modeline atıldı B
-            _Work.RequestingUser = userRepository.GetUserById(User.Identity.GetUserId());//  work_layer = workBusiness.AddWorks(_Work); // iş eklendi geri alınıp atandı.
-            work_layer = workBusiness.AddWorks(_Work); // iş eklendi geri alınıp atandı.
-
+            List<WorkAddition> additionlist = new List<WorkAddition>();
+            work_layer = workBusiness.AddWorks(model,EmployeeUsers, User.Identity.GetUserId()); // iş eklendi geri alınıp atandı.
             foreach (HttpPostedFileBase file in files)
-                {
-                    //Checking file is available to save.  
-                    if (file != null)
-                    {
-                        if (!Directory.Exists(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{_Work.EmployeeUser.Email}")))
-                            Directory.CreateDirectory(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{_Work.EmployeeUser.Email}"));
-                        var InputFileName = Path.GetFileName(file.FileName);
-                        var ServerSavePath = Path.Combine(Server.MapPath($"~/Content/UploadedFiles/{_Work.EmployeeUser.Email}/") + InputFileName);
-                        //Save file to server folder  
-                        file.SaveAs(ServerSavePath);
-                        //assigning file uploaded status to ViewBag for showing message to user.  
-                        ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
-                    workAddition.Add(new WorkAddition { Filename = InputFileName,FilePath=ServerSavePath,Work=work_layer.Result});
-                    }
-                 
-               }
-            if (workAddition.Count>0)
             {
-             //   workAdditionRepository.AddWorkAddition(workAddition);
-            
+                //Checking file is available to save.  
+                if (file != null)
+                {
+                    if (!Directory.Exists(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}")))
+                        Directory.CreateDirectory(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}"));
+                    var InputFileName = Path.GetFileName(file.FileName);
+                    var ServerSavePath = Path.Combine(Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}/") + InputFileName);
+                    //Save file to server folder  
+                    file.SaveAs(ServerSavePath);
+                    //assigning file uploaded status to ViewBag for showing message to user.  
+                    ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
+                    try
+                    {
+                    additionlist.Add(new WorkAddition { Filename = InputFileName, FilePath = userRepository.GetUserById(EmployeeUsers).Email+"/"+InputFileName , Work_Id = work_layer.Result.Works.Id});
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+
+
+                }
+            }
+            foreach (var item in work_layer.Info)
+            {
+                if (item.InfoCode==_BusinessLayer.Messages.InfoMessageCode.AddWorkSuccess)
+                {
+                    workBusiness.AddWorkAddition(additionlist);
+                    ViewBag.result = true;
+                }
+            }
+            foreach (var item in work_layer.Errors)
+            {
+                ModelState.AddModelError("",item.Message);
+                ViewBag.result = false;
             }
             return View(model);
         }
+
         public ActionResult MyWorks()
         {
             return View();
@@ -140,8 +151,6 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         static EditProfileViewModel registerViewModel;
         public new ActionResult Profile(string id)
         {
-
-
             if (id != null)
             {
                 User_Business ub = new User_Business();
@@ -206,7 +215,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 
         }
 
-       
+
 
     }
 }

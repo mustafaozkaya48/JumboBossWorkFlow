@@ -26,17 +26,6 @@ namespace _DbEntities.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Works> Works { get; set; }
-        public DbSet<WorkAddition> WorksAddition { get; set; }
-        //public DbSet<WorkEmployeeUsers> WorkEmployeeUsers { get; set; }
-        public DbSet<Logs> Logs { get; set; }
-        public DbSet<WorkCommenteds> WorkCommenteds { get; set; }
-        public DbSet<Workflow> Workflow { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-        }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -46,6 +35,12 @@ namespace _DbEntities.Models
         {
             return new ApplicationDbContext();
         }
+
+        public virtual DbSet<Logs> Logs { get; set; }
+        public virtual DbSet<WorkAddition> WorkAdditions { get; set; }
+        public virtual DbSet<WorkCommented> WorkCommenteds { get; set; }
+        public virtual DbSet<Workflow> Workflows { get; set; }
+        public virtual DbSet<Work> Works { get; set; }
     }
 
     public class UserInfo

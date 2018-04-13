@@ -53,6 +53,7 @@ namespace _DbEntities.Repository.Concrete
 
         public void Insert(T entity)
         {
+          
             _dbSet.Add(entity);
         }
 

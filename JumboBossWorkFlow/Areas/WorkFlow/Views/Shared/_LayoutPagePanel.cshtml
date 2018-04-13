@@ -1,9 +1,9 @@
 ﻿@using Microsoft.AspNet.Identity
 @using _DbEntities.Models
-@{
-        ApplicationDbContext applicationDb = new ApplicationDbContext();
-        string userId = User.Identity.GetUserId();
-        ApplicationUser currentUser = applicationDb.Users.FirstOrDefault(x => x.Id == userId);
+@{ ApplicationUser currentUser = null;
+    ApplicationDbContext applicationDb = new ApplicationDbContext();
+    string userId = User.Identity.GetUserId();
+    currentUser = applicationDb.Users.FirstOrDefault(x => x.Id == userId);
 }
 <!DOCTYPE html>
 <html lang="tr">

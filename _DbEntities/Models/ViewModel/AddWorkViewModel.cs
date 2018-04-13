@@ -12,9 +12,11 @@ namespace _DbEntities.Models.ViewModel
     public class AddWorkViewModel
     {
         public List<ApplicationUser> Users { get; set; }
+        public List<WorkAddition> WorkAdditionList { get; set; }
+        public ApplicationUser Me { get; set; }
         public string EmployeeUsers { get; set; }
         public FileModel FileModel { get; set; }
-        public Works Works { get; set; }
+        public Work Works { get; set; }
 
     }
     public class FileModel

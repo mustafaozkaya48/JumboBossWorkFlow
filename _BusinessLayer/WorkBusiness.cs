@@ -1,5 +1,6 @@
 ﻿using _DbEntities.Models;
 using _DbEntities.Models.ValueObj;
+using _DbEntities.Models.ViewModel;
 using _DbEntities.Repository.Concrete;
 using System;
 using System.Collections.Generic;
@@ -11,56 +12,77 @@ namespace _BusinessLayer
 {
    public class WorkBusiness
     {
-        _BusinessLayer<Works> work_layer = new _BusinessLayer<Works>();
+        _BusinessLayer<AddWorkViewModel> _work_layer = new _BusinessLayer<AddWorkViewModel>();
         WorkRepository workRepository = new WorkRepository();
-        public _BusinessLayer<Works> AddWorks(Works _worksModel)
+        UserRepository userRepository = new UserRepository();
+        public _BusinessLayer<AddWorkViewModel> AddWorks(AddWorkViewModel model,string EmployeeUsers,string RequestingUser)
         {
             try
             {
-               int result = workRepository.AddWork(_worksModel);
-                if (result > 0)
+                _work_layer.Result = model;
+                model.Works.EmployeeUser_Id = EmployeeUsers;
+                model.Works.RequestingUser_Id = RequestingUser;
+                model.Works.CreateDateTime = DateTime.Now;
+                model.Works.UpdateDateTime = DateTime.Now;
+                if (model.Works.EmployeeUser_Id == "")
                 {
-                    work_layer.AddInfo(Messages.InfoMessageCode.AddWorkSuccess, "İş Eklendi.");
-                    work_layer.Result = workRepository.GetWork(_worksModel);
-                    return work_layer;
+                    _work_layer.AddError(Messages.ErrorMessagesCode.AddWorkError, "Lütfen bir Görevli seçimi yapınız.");
+                }
+                if (model.Works.WorkTitle!=null&&model.Works.EmployeeUser_Id!=null&& model.Works.WorkDescription!=null&& model.Works.WorkDateTime!=null)
+                {
+                    int result = workRepository.AddWork(model.Works);
+                  
+                    if (result > 0)
+                    {
+                        _work_layer.AddInfo(Messages.InfoMessageCode.AddWorkSuccess, "İş Eklendi.");
+                        
+                        _work_layer.Result.Users = userRepository.GetUserListDependencyId(RequestingUser);//Üyeliğe bağlı alt üyeler çağırıldı
+                        _work_layer.Result.Me = userRepository.GetUserById(RequestingUser);
+                        return _work_layer;
+                    }
                 }
                 else
                 {
-                    work_layer.Result = _worksModel;
-                    work_layer.AddError(Messages.ErrorMessagesCode.AddWorkError, "Hay aksi bir sorun oluştu.Yeniden deneyiniz.");
-                    return work_layer;
+                    _work_layer.Result.Users = userRepository.GetUserListDependencyId(RequestingUser);//Üyeliğe bağlı alt üyeler çağırıldı
+                    _work_layer.Result.Me = userRepository.GetUserById(RequestingUser);
+                    _work_layer.Result = model;
+                    return _work_layer;
                 }
             }
             catch (Exception ex)
             {
-                work_layer.Result = _worksModel;
-                work_layer.AddError(Messages.ErrorMessagesCode.AddWorkError, "Hay aksi bir sorun oluştu.Yeniden deneyiniz.");
-                return work_layer;
+
+                _work_layer.Result.Users = userRepository.GetUserListDependencyId(RequestingUser);//Üyeliğe bağlı alt üyeler çağırıldı
+                _work_layer.Result.Me = userRepository.GetUserById(RequestingUser);
+                _work_layer.Result = model;
+                _work_layer.AddError(Messages.ErrorMessagesCode.AddWorkError, ex.Message);
+                return _work_layer;
             }
+            return _work_layer;
         }
-        public _BusinessLayer<Works> UpdateWorks(Works _worksModel)
+        public _BusinessLayer<AddWorkViewModel> UpdateWorks(AddWorkViewModel _worksModel)
         {
             try
             {
-                int result = workRepository.WorkUpdate(_worksModel);
+                int result = workRepository.WorkUpdate(_worksModel.Works);
                 if (result > 0)
                 {
-                    work_layer.AddInfo(Messages.InfoMessageCode.AddWorkSuccess, "İş Güncellendi.");
-                    work_layer.Result = workRepository.GetWork(_worksModel);
-                    return work_layer;
+                    _work_layer.AddInfo(Messages.InfoMessageCode.AddWorkSuccess, "İş Güncellendi.");
+                    _work_layer.Result.Works = workRepository.GetWork(_worksModel.Works);
+                    return _work_layer;
                 }
                 else
                 {
-                    work_layer.Result = _worksModel;
-                    work_layer.AddError(Messages.ErrorMessagesCode.AddWorkError, "Hay aksi bir sorun oluştu.Yeniden deneyiniz.");
-                    return work_layer;
+                    _work_layer.Result = _worksModel;
+                    _work_layer.AddError(Messages.ErrorMessagesCode.AddWorkError, "Hay aksi bir sorun oluştu.Yeniden deneyiniz.");
+                    return _work_layer;
                 }
             }
             catch (Exception)
             {
-                work_layer.Result = _worksModel;
-                work_layer.AddError(Messages.ErrorMessagesCode.AddWorkError, "Hay aksi bir sorun oluştu.Yeniden deneyiniz.");
-                return work_layer;
+                _work_layer.Result = _worksModel;
+                _work_layer.AddError(Messages.ErrorMessagesCode.AddWorkError, "Hay aksi bir sorun oluştu.Yeniden deneyiniz.");
+                return _work_layer;
             }
         }
         public void AddWorkAddition(List<WorkAddition> _worksadditionModel)
@@ -68,5 +90,6 @@ namespace _BusinessLayer
             WorkAdditionRepository workAdditionRepository = new WorkAdditionRepository();
             workAdditionRepository.AddWorkAddition(_worksadditionModel);
         }
+
     }
 }

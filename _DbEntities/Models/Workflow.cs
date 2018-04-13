@@ -9,18 +9,22 @@ using System.Threading.Tasks;
 
 namespace _DbEntities.Models
 {
-    public class Workflow
+    public partial class Workflow
     {
-        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public string RequestingUserId { get; set; }
-        [Required]
-        [ForeignKey("RequestingUserId")]
-        public virtual ApplicationUser RequestingUser { get; set; }
-        [Required]
-        public virtual ApplicationUser EmployeeUsers { get; set; }
-        public int LikeCount { get; set; }
-        public ICollection<WorkCommenteds> Commenteds { get; set; }
 
+        [Required]
+        [StringLength(128)]
+        public string RequestingUserId { get; set; }
+
+        public int LikeCount { get; set; }
+
+        [Required]
+        [StringLength(128)]
+        public string EmployeeUsers_Id { get; set; }
+
+        public virtual ApplicationUser RequestingUser { get; set; }
+
+        public virtual ApplicationUser EmployeeUser { get; set; }
     }
 }

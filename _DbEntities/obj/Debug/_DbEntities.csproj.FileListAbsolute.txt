@@ -109,7 +109,6 @@ C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\_DbEntities\bin\Debug\Microsoft.Owin.
 C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\_DbEntities\bin\Debug\System.Web.Mvc.xml
 C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.csproj.CoreCompileInputs.cache
 C:\Users\MUSTAFA\Desktop\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.csproj.CopyComplete
-C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.csprojResolveAssemblyReference.cache
 C:\Users\teknosa-pc\Documents\GitHub\JumboBossWorkFlow\_DbEntities\bin\Debug\_DbEntities.dll.config
 C:\Users\teknosa-pc\Documents\GitHub\JumboBossWorkFlow\_DbEntities\bin\Debug\_DbEntities.dll
 C:\Users\teknosa-pc\Documents\GitHub\JumboBossWorkFlow\_DbEntities\bin\Debug\_DbEntities.pdb
@@ -141,3 +140,4 @@ C:\Users\teknosa-pc\Documents\GitHub\JumboBossWorkFlow\_DbEntities\obj\Debug\_Db
 C:\Users\teknosa-pc\Documents\GitHub\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.dll
 C:\Users\teknosa-pc\Documents\GitHub\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.pdb
 C:\Users\teknosa-pc\Documents\GitHub\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.csprojResolveAssemblyReference.cache
+C:\Users\Mustafa\Source\Repos\JumboBossWorkFlow\_DbEntities\obj\Debug\_DbEntities.csprojResolveAssemblyReference.cache

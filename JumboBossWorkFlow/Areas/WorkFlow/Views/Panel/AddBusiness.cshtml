@@ -9,11 +9,35 @@
 <!------ Include the above in your HEAD tag ---------->
 <link href="~/Content/Styles/dist/css/AddWork.css" rel="stylesheet" />
 
-@using (Html.BeginForm("AddBusiness", "Panel", Model, FormMethod.Post,new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddBusiness", "Panel", Model, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+
     <div class="container">
         <div class="row">
+            <style type="text/css">
+                .validation-summary-errors li {
+                    list-style: none;
+                    margin: 0;
+                    font-size: 15px;
+                    font-style: oblique;
+                    padding: 5px -10px 5px 0px;
+                }
+            </style>
+            @if (ViewBag.result == false)
+            {
+                <br />
+                @Html.ValidationSummary(false, "", new { @class = "alert alert-warning text-center" })
+            }
+            @if (ViewBag.result == true)
+            {
+                <br />
+                <div class="alert alert-success" role="alert">
+                    <strong>İş Eklendi.</strong> Artık işlerim sekmesinde görtüleye bilirisiniz. Şimdi yeni bir iş ekleyebilirisin.
+                    
+                </div>
+            }
             <section>
+
                 <div class="wizard">
                     <div class="wizard-inner">
                         <div class="connecting-line"></div>
@@ -143,7 +167,7 @@
                                     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
                                     <div class="container bootstrap snippet">
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="main-box no-header clearfix">
@@ -160,32 +184,43 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                    <tr>
+                                                                        <td style="display:none">
+                                                                           @Model.Me.Id
+                                                                        </td>
+                                                                        <td>
+                                                                            <img src="~/Content/images/@Model.Me.userInfo.ProfilPicture" alt="">
+                                                                            <span class="user-link">@Model.Me.userInfo.Name @Model.Me.userInfo.SurName (Ben)</span>
+                                                                            <span class="user-subhead">@Model.Me.userInfo.Department</span>
+                                                                        </td>
+
+                                                                        <td class="text-center">
+                                                                            <span class="label label-default">@Model.Me.userInfo.Department</span>
+                                                                        </td>
+                                                                    </tr>
+
                                                                     @foreach (var item in Model.Users)
-                                {
-                                    <tr>
+                                                                    {
+                                                                  
+                                                                            <tr>
 
-                                        <td style="display:none">
-                                            @item.Id
-                                        </td>
-                                        <td>
+                                                                                <td style="display:none">
+                                                                                    @item.Id
+                                                                                </td>
+                                                                                <td class="text-center">
 
-                                            <img src="~/Content/images/@item.userInfo.ProfilPicture" alt="">
-                                            @if (item.UserName == User.Identity.Name)
-        {
-                                    <span class="user-link">@item.userInfo.Name (Ben)</span>
-}
-else
-{
-                                    <span class="user-link">@item.userInfo.Name </span>
-}
-                                            <span class="user-subhead">@item.userInfo.Department</span>
-                                        </td>
+                                                                                    <img src="~/Content/images/@item.userInfo.ProfilPicture" alt="">
+                                                                                    <span class="user-subhead">@item.userInfo.Department</span>
+                                                                                </td>
+                                                                                <td> <span class="user-link">@item.userInfo.Name @item.userInfo.SurName</span></td>
 
-                                        <td class="text-center">
-                                            <span class="label label-default">@item.userInfo.Department</span>
-                                        </td>
-                                    </tr>
-}
+                                                                                <td class="text-center">
+                                                                                    <span class="label label-default">@item.userInfo.Department</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                     }
+
+                                                                    
 
 
                                                                 </tbody>
@@ -243,14 +278,14 @@ else
                                         </div>
                                         <div class="box-body">
                                             @Html.TextBoxFor(model => model.Works.WorkTitle, new { @class = "form-control input-lg", placeholder = "İş Başlığı", type = "text" })
-                                            @Html.ValidationMessageFor(model => model.Works.WorkTitle, "", new { @class = "text-danger" })
+
                                             <br>
                                             @Html.TextAreaFor(model => model.Works.WorkDescription, new { @class = "form-control", placeholder = "İş Açıklamaası", type = "text", rows = "3" })
-                                            @Html.ValidationMessageFor(model => model.Works.WorkDescription, "", new { @class = "text-danger" })
+
                                             <br>
                                             Tamamlanma Tarihi
-                                            @Html.TextBoxFor(model => model.Works.WorkTitle, new { @class = "form-control input-lg",  type = "datetime-local" })
-                                            @Html.ValidationMessageFor(model => model.Works.WorkTitle, "", new { @class = "text-danger" })
+                                            @Html.TextBoxFor(model => model.Works.WorkDateTime, new { @class = "form-control input-lg", type = "datetime-local" })
+
                                         </div>
                                         <!-- /.box-body -->
                                     </div>
@@ -263,33 +298,22 @@ else
                             </div>
                             <div class="tab-pane" role="tabpanel" id="step3">
                                 <div class="step33">
-                                    <input type="file" multiple id="files" name="files">
-                                    
+                                    <input class="input-lg" type="file" multiple id="files" name="files" max-file-size="3">
+                                    <div class="upload-drop-zone" id="drop-zone">
+                                        Dosyaları buraya sürükleyip bırakın
+                                    </div>
                                     <div class="col-md-12 col-xs-12" style="margin-top:20px;">
-                                        <table class="table table-bordered table-hover table-striped table-foldersystem">
+                                        <table class="table table-bordered table-hover table-striped table-foldersystem" id="FileTable">
                                             <thead>
                                                 <tr>
                                                     <th></th>
                                                     <th>Dosya İsmi</th>
                                                     <th>Boyut</th>
-                                                    <th>Değiştirilme Tarihi</th>
-                                                    <th>Değiştirilme Tarihi</th>
+                                                    <th>Dosya Uzantısı</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><i class="glyphicon glyphicon-folder-open"></i></td>
-                                                    <td>Images</td>
-                                                    <td>4 MB</td>
-                                                    <td>10.02.2015 11:22:54</td>
-                                                    <td>
-                                                        <div class="row">
-                                                            <br><center>
-                                                                <a href='#' class='ng-button'><span class="glyphicon glyphicon-save"></span><h5>İndir</h5></a>
-                                                            </center>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                            <tbody id="filetr">
+                                                <tr></tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -315,4 +339,74 @@ else
         </div>
     </div>
     <script src="~/Content/Styles/dist/js/AddWork.js"></script>
+    <script>
+
+        document.getElementById('files').addEventListener('change', function () {
+            var totalsize = 0;
+            var i = 0;
+            for (var i = 0; i < this.files.length; i++) {
+                var file = this.files[i];
+                var totalsize = totalsize + file.size;
+
+            }
+            if (totalsize < 3145728) {
+                for (var i = 0; i < this.files.length; i++) {
+                    var file = this.files[i];
+                    // This code is only for demo ...
+                    $(table).find('tbody').append("<tr>td><i class='glyphicon glyphicon-folder-open'></i></td> </tr>");
+                    var table = document.getElementById("FileTable");
+                    var row = table.insertRow(1);
+                    var cell = row.insertCell(0);
+                    cell.innerHTML = "<td><i class='glyphicon glyphicon-folder-open'></i></td>";
+                    var cell = row.insertCell(1);
+                    cell.innerHTML = "<td>" + file.name + "</td>";
+                    var cell = row.insertCell(2);
+                    cell.innerHTML = "<td>" + formatBytes(file.size) + "</td>";
+                    var cell = row.insertCell(3);
+                    cell.innerHTML = "<td>" + file.type + "</td>";
+                    var totalsize = totalsize + file.size;
+                    i++;
+                }
+                var row = table.insertRow(i + 1);
+                var cell = row.insertCell(0);
+                cell.innerHTML = "<td></td>";
+                var cell = row.insertCell(1);
+                cell.innerHTML = "<td class='text-right'>Toplam Boyut</td>";
+                var cell = row.insertCell(2);
+                cell.innerHTML = "<td>" + formatBytes(totalsize) + "</td>";
+                var cell = row.insertCell(3);
+                cell.innerHTML = "<td></td>";
+            }
+            else {
+                alert("Dosya 3 MB Büyük Yükleme başarısız !");
+                document.getElementById('files').value = null;
+            }
+        }, false);
+    </script>
+    <script type="text/javascript">
+        function formatBytes(bytes, decimals) {
+            if (bytes == 0) return '0 Bytes';
+            var k = 1024,
+                dm = decimals || 2,
+                sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+                i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+    </script>
+    <script>
+        $(function () {
+            $('form').submit(function () {
+                var isOk = true;
+                $('input[type=files][data-max-size]').each(function () {
+                    if (typeof this.files[0] !== 'undefined') {
+                        var maxSize = parseInt($(this).attr('max-size'), 10),
+                            size = this.files[0].size;
+                        isOk = maxSize > size;
+                        return isOk;
+                    }
+                });
+                return isOk;
+            });
+        });
+    </script>
 }

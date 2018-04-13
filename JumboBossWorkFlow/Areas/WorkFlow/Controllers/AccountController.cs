@@ -157,7 +157,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PasswordHash = model.Password, userInfo = new UserInfo { Name = model.Name, SurName = model.SurName, ProfilPicture = "User.png", CreatedOn = DateTime.Now,Department="Yönetici" }, PhoneNumber = model.PhoneNumber };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PasswordHash = model.Password, userInfo = new UserInfo { Name = model.Name, SurName = model.SurName, ProfilPicture = "User.png", CreatedOn = DateTime.Now,Department="Yönetici"}, PhoneNumber = model.PhoneNumber };
             UserRepository userRepository = new UserRepository();
             if (ModelState.IsValid)
             {
@@ -191,8 +191,10 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                     MailHelper.SendMail(body, model.Email, "Jumbo Boss Hesap Aktifleştrime");
                     return RedirectToAction("Home", "Panel", new { area = "WorkFlow" });
                 }
-                AddErrors(result);              
+                AddErrors(result);
             }
+
+
             return View(model);
         }
 

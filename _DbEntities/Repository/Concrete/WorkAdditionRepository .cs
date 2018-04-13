@@ -25,11 +25,10 @@ namespace _DbEntities.Repository.Concrete
             foreach (var item in entity)
             {
                 _WorkAdditionRepository.Insert(item);
-                
             }
             _WorkAdditionUnitofWork.SaveChanges();
         }
-       
+      
 
 
     }

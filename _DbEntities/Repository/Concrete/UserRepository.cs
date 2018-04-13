@@ -27,7 +27,10 @@ namespace _DbEntities.Repository.Concrete
 
             return _UserRepository.GetAll().ToList();
         }
-
+        public List<ApplicationUser> GetUserListDependencyId(string ıd)
+        {
+            return _UserRepository.GetAll(m=>m.userInfo.DependencyId==ıd).ToList();
+        }
         public ApplicationUser GetUserById(string id)
         {
             return _UserRepository.Get(x => x.Id == id);
@@ -40,7 +43,7 @@ namespace _DbEntities.Repository.Concrete
         {
           _UserRepository.Updete(user);
         }
-
+        
 
     }
 }
