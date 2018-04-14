@@ -117,9 +117,12 @@ body {
 }
 
     </style>
+   
 </head>
+       
 <body>
     <form id="form1" runat="server">
+        
      <div id="particles-js">
 <div class="page-404">
     <div class="outer">
@@ -129,16 +132,19 @@ body {
                 <div class="inner-circle"><i class="fa fa-cogs"></i><span>404</span></div>
                 <span class="inner-status">Opps! Sayyfa Bulunamadı</span>
                 <span class="inner-detail" style="color:#fff;">
-                 Geçersiz istekte bulundunuz. 
+         
+                 Geçersiz istekte bulundunuz. <br />
+
+            <button type="button" class="btn btn-primary">Primary</button>
                 </span>
                 <!--END CONTENT-->
             </div>
         </div>
     </div>
 </div>
+        
 </div>
     </form>
-
     <script>
 particlesJS("particles-js", {
     "particles": {

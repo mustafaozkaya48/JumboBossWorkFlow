@@ -4,5 +4,279 @@
     Layout = "~/Areas/WorkFlow/Views/Shared/_LayoutPagePanel.cshtml";
 }
 
-<h2>MyWorks</h2>
 
+
+<link href="~/Content/Styles/dist/css/MyWorksCss.css" rel="stylesheet" />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="row">
+    <div class="offset-sm-1">
+       
+        <div class="container">
+            <div class="jumbotron" >
+                <h1 align="center">İşlerim</h1>
+      
+
+            
+            </div>
+
+            <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+            <div class="mail-box">
+                <aside class="lg-side">
+                    <div class="inbox-head">
+                  
+                        <form action="#" class="pull-right position">
+                            <div class="input-append">
+                                <input type="text" class="sr-input" placeholder="Neye göre aranacak ? ">
+                                <button class="btn sr-btn" type="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <a class="btn btn-default pull-right" style="margin-top:20px;"  href="~/WorkFlow/Panel/AddBusiness"><i class="glyphicon glyphicon-plus"></i> Burayı Neyapalım silelim mi ?</a>
+                    <div class="inbox-body">
+                        <div class="mail-option">
+                            <table class="table table-inbox table-hover">
+                                <thead>
+                                    <tr class="unread">
+                                        <th class="col-sm-2 view-message  dont-show">Bitiş Tarihi</th>
+                                        <th class="view-message col-sm-3">İşin Konusu</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th class="col-sm-2">
+                                            <span>
+                                                Talep Eden
+                                                <div>
+                                                    <span class="label label-success pull-left"> </span>
+                                                    <span class="label label-info pull-left"> </span>
+                                                    <span class="label label-warning pull-left"> </span>
+                                                    <span class="label label-danger pull-left"> </span>
+                                                </div>
+                                            </span>
+                                        </th>
+                                        <th class="col-sm-2">
+                                            <span>
+                                                Görevli
+                                                <div>
+                                                    <span class="label label-success pull-left"> </span>
+                                                    <span class="label label-info pull-left"> </span>
+                                                    <span class="label label-warning pull-left"> </span>
+                                                    <span class="label label-danger pull-left"> </span>
+                                                </div>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td onclick="myFunction(this)" class="view-message  dont-show"><h5>12.12.2012</h5></td>
+                                        <td onclick="myFunction(this)" colspan="3" class="view-message"><h5>Limon</h5></td>
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-info ">Arda Koca</span></h4></td>
+
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-success ">Arda Koca</span></h4></td>
+                                        <td>
+                                            <span class="btn-group pull-right" style="margin-top: 5px">
+                                                <button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#item_edit"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button class="btn btn-danger btn-xs" ; data-toggle="modal" data-target="#item_remove"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td onclick="myFunction(this)" class="view-message  dont-show"><h5>18.10.2017</h5></td>
+                                        <td onclick="myFunction(this)" colspan="3" class="view-message"><h5>Finans</h5></td>
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-info ">Arda Koca</span></h4></td>
+
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-success ">Arda Koca</span></h4></td>
+                                        <td>
+                                            <span class="btn-group pull-right" style="margin-top: 5px">
+                                                <button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#item_edit"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button class="btn btn-danger btn-xs" ; data-toggle="modal" data-target="#item_remove"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td onclick="myFunction(this)" class="view-message  dont-show"><h5>25.03.2018</h5></td>
+                                        <td onclick="myFunction(this)" colspan="3" class="view-message"><h5>Konaklama</h5></td>
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-info ">Arda Koca</span></h4></td>
+
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-success ">Arda Koca</span></h4></td>
+                                        <td>
+                                            <span class="btn-group pull-right" style="margin-top: 5px">
+                                                <button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#item_edit"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button class="btn btn-danger btn-xs" ; data-toggle="modal" data-target="#item_remove"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td onclick="myFunction(this)" class="view-message  dont-show"><h5>12.04.2018</h5></td>
+                                        <td onclick="myFunction(this)" colspan="3" class="view-message"><h5>2018 Hedefler</h5></td>
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-info ">Arda Koca</span></h4></td>
+
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-success ">Arda Koca</span></h4></td>
+                                        <td>
+                                            <span class="btn-group pull-right" style="margin-top: 5px">
+                                                <button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#item_edit"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button class="btn btn-danger btn-xs" ; data-toggle="modal" data-target="#item_remove"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td onclick="myFunction(this)" class="view-message  dont-show"><h5>25.26.2018</h5></td>
+                                        <td onclick="myFunction(this)" colspan="3" class="view-message"><h5>Yazılım</h5></td>
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-info ">Arda Koca</span></h4></td>
+
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-success ">Arda Koca</span></h4></td>
+                                        <td>
+                                            <span class="btn-group pull-right" style="margin-top: 5px">
+                                                <button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#item_edit"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button class="btn btn-danger btn-xs" ; data-toggle="modal" data-target="#item_remove"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td onclick="myFunction(this)" class="view-message  dont-show"><h5>30.01.2017</h5></td>
+                                        <td onclick="myFunction(this)" colspan="3" class="view-message"><h5>Ulaşım</h5></td>
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-info ">Arda Koca</span></h4></td>
+
+                                        <td onclick="myFunction(this)"><h4 style="margin-top: 5px;"><span class="label label-success ">Arda Koca</span></h4></td>
+                                        <td>
+                                            <span class="btn-group pull-right" style="margin-top: 5px">
+                                                <button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#item_edit"><i class="glyphicon glyphicon-edit"></i></button>
+                                                <button class="btn btn-danger btn-xs" ; data-toggle="modal" data-target="#item_remove"><i class="glyphicon glyphicon-remove"></i></button>
+                                            </span>
+                                        </td>
+</tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <li class="disabled"><span>«</span></li>
+                            <li class="active"><span>1</span></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li class="disabled"><span>...</span></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#" rel="next">»</a></li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+            <div class="modal fade item_edit" id="item_edit">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                            <h3 class="modal-title">Cập nhật thông tin nhân viên </h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-4 item_img">
+                                    <img src="http://www.bvctch.vn/vnt_upload/about/thumbs/270_crop__Bsvoduylinh.jpg" class="img-responsive">
+                                </div>
+                                <div class="col-md-8 item_content">
+                                    <form>
+                                        <h4>
+                                            <span>Mã nhân viên: NV0001</span>
+                                            <!--span class="input-group-btn">
+                                        <button class="btn btn-danger btn-xs pull-right"; data-toggle="modal" data-target="#item_view"><i class="glyphicon glyphicon-remove" ></i></button>
+                                    </span-->
+                                        </h4>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="panel">
+                                                        <div class="panel-body">
+                                                            <label>Chức vụ</label><input type='text' class='form-control' value=''>
+                                                            <label style="margin-top:15px;">Tinh trạng</label><input type='text' class='form-control' value=''>
+                                                            <label style="margin-top:15px;">Họ và tên</label><input type='text' class='form-control' value=''>
+                                                            <!--label style="margin-top:15px;">Giới tính</label><input type='text' class='form-control'  value='' >
+                                                    <label style="margin-top:15px;">CMND/CCCD :</label><input type='text' class='form-control'  value='' >
+                                                    <label style="margin-top:15px;">Số diện thoại</label><input type='text' class='form-control'  value='' >
+                                                    <label style="margin-top:15px;">Địa chỉ</label><input type='text' class='form-control'  value='' -->
+                                                            <label style="margin-top:15px;">Mô tả bản thân</label><textarea class="form-control " style="resize: vertical;" rows="2" id="comment"></textarea>
+                                                            <div class="text-center" style="margin-top:15px;"><button class="btn btn-primary btn-sx" type="button"><i class="glyphicon glyphicon-save"></i> Save</button></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+
+            <div class="modal fade item_remove" id="item_remove">
+
+                <div class="modal fade item_view" id="item_view">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                                <h3 class="modal-title">Thông tin chi tiết nhân viên </h3>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6 item_img">
+                                        <img src="http://www.bvctch.vn/vnt_upload/about/thumbs/270_crop__Bsvoduylinh.jpg" class="img-responsive">
+                                    </div>
+                                    <div class="col-md-6 item_content">
+                                        <h4>
+                                            <span>Mã nhân viên: NV0001</span>
+                                            <!--span class="input-group-btn">
+                                    <button class="btn btn-danger btn-xs pull-right"; data-dismiss="modal" data-toggle="modal" data-target="#item_remove"><i class="glyphicon glyphicon-remove" ></i></button>
+                                    <button class="btn btn-warning btn-xs pull-right"; data-dismiss="modal" data-toggle="modal" data-target= "#item_edit"><i class="glyphicon glyphicon-edit" ></i></button>
+                                </span-->
+                                        </h4>
+                                        <h5>Chức vụ: <span>Kế toán</span></h5>
+                                        <p>Tình trạng: Làm việc</p>
+
+                                        <p>Họ và tên: Tên Của Nhân Viên</p>
+                                        <p>Bằng cấp: Đại học</p>
+                                        <p>SĐT: 09111xxxxx</p>
+                                        <p>Địa chỉ: 227 Nguyễn Văn Cừ - P.2 - Q.5 - Tp.HCM</p>
+                                        <p>Mô tả bản thân.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                            <h3 class="modal-title">Xác nhận</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có thật sự muốn xóa?</p>
+                            <div class="row">
+                                <div class="col-12-xs text-center">
+                                    <button class="btn btn-success btn-md col-3-xs">Có</button>
+                                    <button class="btn btn-danger btn-md col-3-xs">Không</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function myFunction(x) {
+            $("#item_view").modal();
+        };
+    </script>
