@@ -20,7 +20,7 @@ using _BusinessLayer;
 
 namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 {
-    [Authorize,LogFilter]
+    [Authorize, LogFilter]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -157,17 +157,17 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PasswordHash = model.Password, userInfo = new UserInfo { Name = model.Name, SurName = model.SurName, ProfilPicture = "User.png", CreatedOn = DateTime.Now,Department="Yönetici"}, PhoneNumber = model.PhoneNumber };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PasswordHash = model.Password, userInfo = new UserInfo { Name = model.Name, SurName = model.SurName, ProfilPicture = "User.png", CreatedOn = DateTime.Now, Department = "Yönetici" }, PhoneNumber = model.PhoneNumber };
             UserRepository userRepository = new UserRepository();
             if (ModelState.IsValid)
             {
 
-                if (userRepository.GetUser(user)!=null)
+                if (userRepository.GetUser(user) != null)
                 {
-                    ModelState.AddModelError("Email","E-Posta adresi daha önce kullanılmış.");
+                    ModelState.AddModelError("Email", "E-Posta adresi daha önce kullanılmış.");
                     return View(model);
                 }
-                
+
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 ApplicationDbContext db = new ApplicationDbContext();
@@ -177,7 +177,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                     db.Roles.Add(new IdentityRole { Name = "Admin" });
                     db.SaveChanges();
                 }
-                if (user.Roles!=null)
+                if (user.Roles != null)
                 {
                     await this.UserManager.AddToRoleAsync(user.Id, "Admin");
                 }
@@ -187,7 +187,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     string siteUri = ConfigHelper.Get<string>("SiteRootUri");
                     string ActivateUri = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    string body = $"<h1>Merhaba {model.Name+" "+model.SurName}</h1> <br /><br /><h2>Hesabınızı aktifleştirmek için <a href='{ActivateUri}' target='_blank'>Tıklayınız</a></h2>.";
+                    string body = $"<h1>Merhaba {model.Name + " " + model.SurName}</h1> <br /><br /><h2>Hesabınızı aktifleştirmek için <a href='{ActivateUri}' target='_blank'>Tıklayınız</a></h2>.";
                     MailHelper.SendMail(body, model.Email, "Jumbo Boss Hesap Aktifleştrime");
                     return RedirectToAction("Home", "Panel", new { area = "WorkFlow" });
                 }
@@ -229,10 +229,10 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-          
-                    if (user!=null)
-                    {
-                        ViewBag.result = true;
+
+                if (user != null)
+                {
+                    ViewBag.result = true;
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     string siteUri = ConfigHelper.Get<string>("SiteRootUri");
@@ -240,13 +240,13 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                     string body = $"<h1>Merhaba {model.Email + " " + model.Email}</h1> <br /><br /><h2>Şifrenizi Sıfırlamak için  <a href='{ActivateUri}' target='_blank'>Tıklayınız</a></h2>. <hr />İşlemi siz gerçekletişmediyseniz maili dikkate almayınız.";
                     MailHelper.SendMail(body, model.Email, "Jumbo Boss Şifre Sıfılama");
                 }
-                    else
-                    {
-                        ViewBag.result = false;
-                    }
-                   
-                    return View("ForgotPassword");
-                
+                else
+                {
+                    ViewBag.result = false;
+                }
+
+                return View("ForgotPassword");
+
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
@@ -270,9 +270,9 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string userId,string code)
+        public ActionResult ResetPassword(string userId, string code)
         {
-            return code == null ? View("Error") : View(new ResetPasswordViewModel {Email= UserManager.GetEmail(userId)});
+            return code == null ? View("Error") : View(new ResetPasswordViewModel { Email = UserManager.GetEmail(userId) });
         }
 
         //
@@ -545,13 +545,85 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Profile","Panel");
+                return RedirectToAction("Profile", "Panel");
             }
             else
             {
                 ModelState.AddModelError("OldPassword", "Yanlış Şifre");
             }
             ViewBag.result = ModelState.Count();
+            return View(model);
+        }
+        [AllowAnonymous]
+        public ActionResult JoinUser(string cid)
+        {
+            if (cid!=null)
+            {
+                try
+                {
+                    EmployeeInvitesRepositoy employeeInvitesRepositoy = new EmployeeInvitesRepositoy();
+                    EmployeeInvite ep = new EmployeeInvite();
+                    Guid guid = Guid.Parse(cid);
+                    ep = employeeInvitesRepositoy.GetEmployeeInvitesByCid(Guid.Parse(cid));
+                    if (ep != null)
+                    {
+                        RegisterViewModel model = new RegisterViewModel();
+                        model.DependencyId = ep.DependencyId;
+                        model.Email = ep.InvitationEmail;
+                        return View(model);
+                    
+                    }
+                }
+                catch (Exception)
+                {
+                    return Redirect("~/Error404.aspx");
+                }
+            }
+            else
+            {
+                return Redirect("~/Error404.aspx");
+            }
+            return Redirect("~/Error404.aspx");
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> JoinUser(RegisterViewModel model)
+        {
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email,EmailConfirmed=true, PasswordHash = model.Password, userInfo = new UserInfo { Name = model.Name, SurName = model.SurName, ProfilPicture = "User.png", CreatedOn = DateTime.Now, Department = "Takım Üyesi",DependencyId=model.DependencyId }, PhoneNumber = model.PhoneNumber };
+            UserRepository userRepository = new UserRepository();
+            if (ModelState.IsValid)
+            {
+                if (userRepository.GetUser(user) != null)
+                {
+                    ModelState.AddModelError("Email", "E-Posta adresi daha önce kullanılmış.");
+                    return View(model);
+                }
+                var result = await UserManager.CreateAsync(user, model.Password);
+                ApplicationDbContext db = new ApplicationDbContext();
+                var role = db.Roles.Where(x => x.Name == "Member").FirstOrDefault();
+                if (role == null)
+                {
+                    db.Roles.Add(new IdentityRole { Name = "Member" });
+                    db.SaveChanges();
+                }
+                if (user.Roles != null)
+                {
+                    await this.UserManager.AddToRoleAsync(user.Id, "Member");
+                }
+                if (result.Succeeded)
+                {
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToAction("Home", "Panel", new { area = "WorkFlow" });
+                }
+                AddErrors(result);
+            }
+
+
             return View(model);
         }
 

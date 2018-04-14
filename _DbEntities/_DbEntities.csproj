@@ -64,10 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultConnection.cs" />
+    <Compile Include="Models\EmployeeInvite.cs" />
     <Compile Include="Models\ValueObj\AddWork.cs" />
     <Compile Include="Models\ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Logs.cs" />
+    <Compile Include="Models\ViewModel\AddUserViewModel.cs" />
     <Compile Include="Models\ViewModel\AddWorkViewModel.cs" />
     <Compile Include="Models\ViewModel\ManageViewModels.cs" />
     <Compile Include="Models\WorkAddition.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Repository\Abstract\IUnitOfWork.cs" />
     <Compile Include="Repository\Concrete\EFRepository.cs" />
     <Compile Include="Repository\Concrete\EFUnitOfWork.cs" />
+    <Compile Include="Repository\Concrete\EmployeeInvitesRepositoy.cs" />
     <Compile Include="Repository\Concrete\UserRepository.cs" />
     <Compile Include="Models\Workflow.cs" />
     <Compile Include="Repository\Concrete\WorkAdditionRepository .cs" />

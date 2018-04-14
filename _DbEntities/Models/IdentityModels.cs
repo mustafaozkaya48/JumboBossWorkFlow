@@ -41,6 +41,7 @@ namespace _DbEntities.Models
         public virtual DbSet<WorkCommented> WorkCommenteds { get; set; }
         public virtual DbSet<Workflow> Workflows { get; set; }
         public virtual DbSet<Work> Works { get; set; }
+        public virtual DbSet<EmployeeInvite> EmployeeInvites { get; set; }
     }
 
     public class UserInfo

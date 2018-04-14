@@ -33,7 +33,7 @@ namespace _DbEntities.Repository.Concrete
 
         public T Get(Expression<Func<T, bool>> where)
         {
-           return _dbSet.Where(where).SingleOrDefault();
+           return _dbSet.Where(where).FirstOrDefault();
         }
 
         public IQueryable<T> GetAll()

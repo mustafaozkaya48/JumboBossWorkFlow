@@ -89,8 +89,7 @@ namespace _DbEntities.Models
         [Required(), StringLength(10), DisplayName("Telefon Numarası"), MinLength(10, ErrorMessage = "Lütfen 11 haneli telefon numarası giriniz.")]
         public string PhoneNumber { get; set; }
 
-
-
+        public string DependencyId { get; set; }
     }
 
     public class ResetPasswordViewModel

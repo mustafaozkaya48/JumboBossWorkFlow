@@ -15,7 +15,7 @@ using System.Web.Security;
 
 namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 {
-    [Authorize]
+    [Authorize, LogFilter]
     public class PanelController : Controller
     {
 

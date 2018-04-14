@@ -12,8 +12,8 @@
         //user Register - Login Error KEY
         Thereisaproblem = 205,
         ProfileCouldNotUpdated=206,
-        AddWorkError=207
-            
+        AddWorkError=207,
+        SendInvalteError=208    
 
 
     }

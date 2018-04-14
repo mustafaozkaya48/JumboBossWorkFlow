@@ -1,0 +1,151 @@
+﻿@model _DbEntities.Models.ViewModel.AddUserViewModel
+@{
+    ViewBag.Title = "Kullanıcı Ekle";
+    Layout = "~/Areas/WorkFlow/Views/Shared/_LayoutPagePanel.cshtml";
+}
+
+<link href="~/Content/Styles/dist/css/AddUser.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-lg-offset-2 col-lg-10 ">
+
+    </div>
+</div>
+@using (Html.BeginForm("AddUser", "Settings", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron ">
+                    <div class="container">
+                        <h1 class="display-3">Kullanıcı Ekleme</h1>
+                        <p class="lead">Kullanıcı eklemek için Email adresi giriniz</p>
+                    </div>
+                </div>
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            @if (ViewBag.result != null)
+                            {
+                                <div class="alert alert-success fade in alert-dismissible" style="margin-top:18px;">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    <strong>@ViewBag.result</strong> Davetinizi kabul ettikten sonra burada görüntüleye bilirisiniz.
+                                </div>
+                            }
+                            @if (ViewBag.error != null)
+                            {
+                                <div class="alert alert-danger fade in alert-dismissible" style="margin-top:18px;">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    @Html.ValidationSummary(false, "")
+                                </div>
+                            }
+
+
+                            <div>
+                                <div class="input-group input-group-sm">
+                                    @Html.TextBoxFor(m => m.EMail, new { @class = "form-control ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-email", type = "email", placeholder = "Davet edeceğiniz E-Posta adresini giriniz." })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" type="submit">Davet Et</button>
+                                    </span>
+
+                                </div>
+                                <br />
+                                <br />
+                            </div>
+
+                            <table class="table user-list">
+                                <thead>
+                                    <tr>
+                                        <th><span>Ad Soyad</span></th>
+                                        <th><span>Kayıt Tarihi</span></th>
+                                        <th class="text-center"><span>Statü</span></th>
+                                        <th><span>E-Posta</span></th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="~/Content/images/@Model.Me.userInfo.ProfilPicture" alt="">
+                                            <a href="#" class="user-link">@Model.Me.userInfo.Name @Model.Me.userInfo.SurName</a>
+                                            <span class="user-subhead">@Model.Me.userInfo.Department</span>
+                                        </td>
+                                        <td>@Model.Me.userInfo.CreatedOn</td>
+                                        <td class="text-center">
+                                            <span class="label label-primary">@Model.Me.userInfo.Department</span>
+                                        </td>
+                                        <td>
+                                            <a href="#">@Model.Me.Email</a>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <a href="" class="table-link">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="table-link">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="table-link danger">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    @foreach (var item in Model.Users)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img src="~/Content/images/@item.userInfo.ProfilPicture" alt="">
+                                                <a href="#" class="user-link">@item.userInfo.Name @item.userInfo.SurName</a>
+                                                <span class="user-subhead">@item.userInfo.Department</span>
+                                            </td>
+                                            <td>@item.userInfo.CreatedOn</td>
+                                            <td class="text-center">
+                                                <span class="label label-success">@item.userInfo.Department</span>
+                                            </td>
+                                            <td>
+                                                <a href="#">@item.Email</a>
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <a href="~WorkFlow/Panel/Profile/@item.Id" class="table-link">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                                <a href="#" class="table-link">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                                <a href="#" class="table-link danger">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-square fa-stack-2x"></i>
+                                                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ./wrapper -->
+
+}
