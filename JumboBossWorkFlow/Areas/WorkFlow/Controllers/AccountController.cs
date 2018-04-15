@@ -570,6 +570,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                         RegisterViewModel model = new RegisterViewModel();
                         model.DependencyId = ep.DependencyId;
                         model.Email = ep.InvitationEmail;
+                        employeeInvitesRepositoy.DeleteEmployeeInvites(ep);
                         return View(model);
                     
                     }
@@ -593,7 +594,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> JoinUser(RegisterViewModel model)
         {
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email,EmailConfirmed=true, PasswordHash = model.Password, userInfo = new UserInfo { Name = model.Name, SurName = model.SurName, ProfilPicture = "User.png", CreatedOn = DateTime.Now, Department = "Takım Üyesi",DependencyId=model.DependencyId }, PhoneNumber = model.PhoneNumber };
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email,PasswordHash = model.Password, userInfo = new UserInfo { Name = model.Name, SurName = model.SurName, ProfilPicture = "User.png", CreatedOn = DateTime.Now, Department = "Takım Üyesi",DependencyId=model.DependencyId }, PhoneNumber = model.PhoneNumber };
             UserRepository userRepository = new UserRepository();
             if (ModelState.IsValid)
             {
@@ -618,6 +619,11 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                 {
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                    string ActivateUri = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    string body = $"<h1>Merhaba {model.Name + " " + model.SurName}</h1> <br /><br /><h2>Hesabınızı aktifleştirmek için <a href='{ActivateUri}' target='_blank'>Tıklayınız</a></h2>.";
+                    MailHelper.SendMail(body, model.Email, "Jumbo Boss Hesap Aktifleştrime");
+
                     return RedirectToAction("Home", "Panel", new { area = "WorkFlow" });
                 }
                 AddErrors(result);

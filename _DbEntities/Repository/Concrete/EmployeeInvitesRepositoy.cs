@@ -30,6 +30,10 @@ namespace _DbEntities.Repository.Concrete
             
             return _EmployeeInvitesRepository.Get(m => m.InvitationEmail == Email);
         }
+        public void DeleteEmployeeInvites(EmployeeInvite entity)
+        {
+            _EmployeeInvitesRepository.Delete(entity);
+        }
         public EmployeeInvite GetEmployeeInvitesByCid(Guid cid)
         {
 
