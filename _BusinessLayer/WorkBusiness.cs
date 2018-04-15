@@ -87,9 +87,6 @@ namespace _BusinessLayer
             WorkAdditionRepository workAdditionRepository = new WorkAdditionRepository();
             workAdditionRepository.AddWorkAddition(_worksadditionModel);
         }
-        public List<Work> GetAllWorks(string UserId)
-        {
-            return workRepository.GetListWorks(UserId).OrderBy(m => m.WorkDateTime).ToList();
-        }
+
     }
 }

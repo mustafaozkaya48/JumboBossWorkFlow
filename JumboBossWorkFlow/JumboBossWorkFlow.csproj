@@ -229,7 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Styles\dist\css\AddUser.css" />
-    <Content Include="Content\Styles\dist\css\MyWorksCss.css" />
     <Content Include="Error404.aspx" />
     <Content Include="Error500.aspx" />
     <Content Include="Content\bootstrap-grid.css" />

@@ -25,28 +25,6 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
     [Authorize, LogFilter]
     public class SettingsController : Controller
     {
-        private ApplicationUserManager _userManager;
-
-        public SettingsController()
-        {
-        }
-
-        public SettingsController(ApplicationUserManager userManager)
-        {
-            UserManager = userManager;
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
 
         public ActionResult AddUser()
         {
@@ -58,31 +36,8 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddUser(AddUserViewModel model, string userd, string psw)
+        public ActionResult AddUser(AddUserViewModel model)
         {
-            UserRepository userRepository = new UserRepository();
-            ApplicationUser user = new ApplicationUser();
-            user = userRepository.GetUserById(userd);
-            if (user != null)
-            {
-                if (UserManager.PasswordHasher.VerifyHashedPassword(userRepository.GetUserById(User.Identity.GetUserId()).PasswordHash, psw) != PasswordVerificationResult.Failed)
-            {
-              
-             
-                    if (user.userInfo.DependencyId == userRepository.GetUserById(User.Identity.GetUserId()).Id)
-                    {
-                        await UserManager.RemoveFromRoleAsync(user.Id, "Member");
-                        userRepository.DeleteUser(user);
-                    }
-              
-            }
-            else
-            {
-                ViewBag.Errorpass = true;
-            }
-            }
-
-
             if (model.EMail != null)
             {
                 UserRepository ur = new UserRepository();
@@ -104,7 +59,7 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 
             }
 
-         
+            UserRepository userRepository = new UserRepository();
             model.Me = userRepository.GetUserById(User.Identity.GetUserId());//Kullanıcının kendisi Çekildi
             model.Users = userRepository.GetUserListDependencyId(User.Identity.GetUserId());//Şube Bağlı üyeler çekildi
 

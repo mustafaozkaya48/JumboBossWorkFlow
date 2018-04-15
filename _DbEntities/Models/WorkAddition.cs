@@ -14,8 +14,9 @@ namespace _DbEntities.Models
         public Guid Id { get; set; }
 
         public string Filename { get; set; }
-        public string FileType { get; set; }
+
         public string FilePath { get; set; }
+
         public Guid Work_Id { get; set; }
         [ForeignKey("Work_Id")]
         public virtual Work Work { get; set; }

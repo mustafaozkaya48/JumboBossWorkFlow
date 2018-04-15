@@ -28,15 +28,7 @@ namespace _DbEntities.Repository.Concrete
             }
             _WorkAdditionUnitofWork.SaveChanges();
         }
-        public List<WorkAddition> GetWorkAdditions(Guid WorkId)
-        {
-            return _WorkAdditionRepository.GetAll(m=>m.Work_Id==WorkId).ToList();
-        }
-
-        public WorkAddition GetWorkById(Guid WorkId)
-        {
-            return _WorkAdditionRepository.Get(m => m.Id == WorkId);
-        }
+      
 
 
     }

@@ -164,7 +164,8 @@ namespace _DbEntities.Models
         [StringLength(350)]
         public string Address { get; set; }
         public string ProfilPicture { get; set; }
-        public bool ConfirmEMail { get; set; }
+
+
 
     }
 

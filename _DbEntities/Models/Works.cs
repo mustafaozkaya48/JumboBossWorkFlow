@@ -34,10 +34,6 @@ namespace _DbEntities.Models
         public virtual ApplicationUser EmployeeUser { get; set; }
         [ForeignKey("RequestingUser_Id")]
         public virtual ApplicationUser RequestingUser { get; set; }
-     
-        public string Work_Id { get; set; }
-        [ForeignKey("Work_Id")]
-        public ICollection<WorkAddition> WorkAddition { get; set; }
 
 
     }
