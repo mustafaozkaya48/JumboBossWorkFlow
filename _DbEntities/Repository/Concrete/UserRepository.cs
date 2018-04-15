@@ -43,7 +43,11 @@ namespace _DbEntities.Repository.Concrete
         {
           _UserRepository.Updete(user);
         }
-        
+        public void DeleteUser(ApplicationUser user)
+        {
+            _UserRepository.Delete(user);
+            _UserUnitofWork.SaveChanges();
+        }
 
     }
 }

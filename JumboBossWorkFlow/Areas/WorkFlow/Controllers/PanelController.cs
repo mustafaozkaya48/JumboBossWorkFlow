@@ -1,4 +1,5 @@
 ﻿using _BusinessLayer;
+using _BusinessLayer.Helpers;
 using _DbEntities.Models;
 using _DbEntities.Models.ViewModel;
 using _DbEntities.Repository.Concrete;
@@ -82,13 +83,18 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
             UserRepository userRepository = new UserRepository();
             model.Me = userRepository.GetUserById(User.Identity.GetUserId());
             model.Users = userRepository.GetUserListDependencyId(User.Identity.GetUserId());//Üyeliğe bağlı alt üyeler çağırıldı
+            if (model.Me.userInfo.DependencyId!=null)
+            {
+                model.Users.Add(userRepository.GetUserById(model.Me.userInfo.DependencyId));
+            }
             return View(model);
         }
         [HttpPost]
         public ActionResult AddBusiness(AddWorkViewModel model, string EmployeeUsers, HttpPostedFileBase[] files)
         {
-            _BusinessLayer<AddWorkViewModel> work_layer = new _BusinessLayer<AddWorkViewModel>();
             UserRepository userRepository = new UserRepository();
+            _BusinessLayer<AddWorkViewModel> work_layer = new _BusinessLayer<AddWorkViewModel>();
+
             if (ModelState.IsValid)
             {
 
@@ -104,12 +110,13 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                         if (!Directory.Exists(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}")))
                             Directory.CreateDirectory(HttpContext.Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}"));
                         var InputFileName = Path.GetFileName(file.FileName);
+                        var fileType = file.ContentType;
                         var ServerSavePath = Path.Combine(Server.MapPath($"~/Content/UploadedFiles/{User.Identity.GetUserName()}/") + InputFileName);
                         //Save file to server folder  
                         file.SaveAs(ServerSavePath);
                         //assigning file uploaded status to ViewBag for showing message to user.  
                         ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
-                        additionlist.Add(new WorkAddition { Filename = InputFileName, FilePath = userRepository.GetUserById(EmployeeUsers).Email + "/" + InputFileName, Work_Id = work_layer.Result.Works.Id });
+                        additionlist.Add(new WorkAddition { FileType=fileType, Filename = InputFileName, FilePath = userRepository.GetUserById(EmployeeUsers).Email + "/" + InputFileName, Work_Id = work_layer.Result.Works.Id });
 
 
 
@@ -142,7 +149,8 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 
         public ActionResult MyWorks()
         {
-            return View();
+            WorkBusiness wb = new WorkBusiness();
+            return View(wb.GetAllWorks(User.Identity.GetUserId()));
         }
 
         public ActionResult WaitingJobs()
@@ -172,7 +180,8 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
                     SurName = applicationUser.userInfo.SurName,
                     Address = applicationUser.userInfo.Address,
                     CompanyInfo = applicationUser.userInfo.CompanyInfo,
-                    ProfilPicture = applicationUser.userInfo.ProfilPicture
+                    ProfilPicture = applicationUser.userInfo.ProfilPicture,
+                    ConfirmEMail = applicationUser.EmailConfirmed,
                 };
                 return View(registerViewModel);
             }
@@ -219,6 +228,35 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 
 
 
+        }
+        public async Task<ActionResult> SendEmailConfrimMail()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                User_Business ub = new User_Business();
+                ApplicationUser user = ub.GetUserById(User.Identity.GetUserId());
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(User.Identity.GetUserId());
+                string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                string ActivateUri = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                string body = $"<h1>Merhaba {user.userInfo.Name + " " + user.userInfo.SurName}</h1> <br /><br /><h2>Hesabınızı aktifleştirmek için <a href='{ActivateUri}' target='_blank'>Tıklayınız</a></h2>.";
+                MailHelper.SendMail(body, user.Email, "Jumbo Boss İş Takip Programı Hesap Aktifleştrime");
+                TempData["PostMail"] = true;
+                return RedirectToAction("Profile", "Panel",new {id=User.Identity.GetUserId()});
+              
+            }
+            else return Redirect("~Error404.aspx");
+        
+         
+        }
+
+        public FileResult DownloadFile(string id)
+        {
+            WorkAdditionRepository rp = new WorkAdditionRepository();
+            Guid guid = Guid.Parse(id.ToUpper());
+            WorkAddition addition = rp.GetWorkById(guid);
+            FilePathResult filePathResult = new FilePathResult(Server.MapPath("~/Content/UploadedFiles/" + addition.FilePath + ""), addition.FileType);
+            filePathResult.FileDownloadName = $"{DateTime.Now.ToString()}_{addition.Filename}";
+            return filePathResult;
         }
 
 

@@ -33,10 +33,15 @@ namespace _DbEntities.Repository.Concrete
         }
         public Work GetWork(Work entity)
         {
-           
+
             return _WorkRepository.Find(entity);
         }
+        public List<Work> GetListWorks(string UserId)
+        {
+            return _WorkRepository.GetAll(m => m.EmployeeUser_Id == UserId).ToList();
+        }
 
+      
 
     }
 }

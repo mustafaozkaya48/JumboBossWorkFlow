@@ -253,20 +253,23 @@
 
                         </ul>
                     </li>
+                    @if (currentUser.userInfo.DependencyId ==null)
+    {
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa fa-cog "></i> <span>Ayarlar</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="~/Workflow/Settings/AddUser"><i class="fa fa fa-user-plus"></i> Kullanıcı Ekle</a></li>
 
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa fa-cog "></i> <span>Ayarlar</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="~/Workflow/Settings/AddUser"><i class="fa fa fa-user-plus"></i> Kullanıcı Ekle</a></li>
 
+                    </ul>
+                </li>
+}
 
-                        </ul>
-                    </li>
                 </ul>
             </section>
             <!-- /.sidebar -->

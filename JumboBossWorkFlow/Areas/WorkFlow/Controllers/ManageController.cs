@@ -10,6 +10,8 @@ using _DbEntities.Models;
 using JumboBossWorkFlow.Controllers;
 using JumboBossWorkFlow;
 using JumboBossWorkFlow.Areas.WorkFlow.Controllers;
+using _DbEntities.Repository.Concrete;
+using System.Web.Security;
 
 namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 {
@@ -324,7 +326,23 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
-
+     
+        public async Task<ActionResult> DeleteUser(string userd,string psw)
+        {
+            UserRepository ur = new UserRepository();
+            ApplicationUser user = new ApplicationUser();
+            user = ur.GetUserById(userd);
+         
+            if (user != null)
+            {
+                if (user.userInfo.DependencyId == ur.GetUserById(User.Identity.GetUserId()).Id)
+                {
+                    await UserManager.RemoveFromRoleAsync(user.Id,"Member");
+                     ur.DeleteUser(user);
+                }
+            }
+            return RedirectToAction("AddUser", "WorkFlow/Settings");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -389,4 +407,5 @@ namespace JumboBossWorkFlow.Areas.WorkFlow.Controllers
 
 #endregion
     }
+
 }

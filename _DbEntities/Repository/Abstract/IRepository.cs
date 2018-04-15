@@ -15,7 +15,6 @@ namespace _DbEntities.Repository.Abstract
         T GetById(int id);
 
         T Get(Expression<Func<T, bool>> where);
-
         void Insert(T entity);
         void Delete(T entity);
         void Delete(int id);
