@@ -37,6 +37,18 @@ namespace _DbEntities.Repository.Concrete
         {
             return _WorkAdditionRepository.Get(m => m.Id == WorkId);
         }
+        public List<WorkAddition> GetListWorkById(Guid WorkId)
+        {
+            return _WorkAdditionRepository.GetAll(m => m.Work_Id == WorkId).ToList();
+        }
+        public WorkAddition DeleteById(Guid Id)
+        {
+            WorkAddition wa = new WorkAddition();
+            wa = _WorkAdditionRepository.Get(w=>w.Id==Id);
+            _WorkAdditionRepository.Delete(wa);
+            _WorkAdditionUnitofWork.SaveChanges();
+            return wa;
+        }
 
 
     }

@@ -1,0 +1,132 @@
+﻿@model _DbEntities.Models.EditProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Areas/WorkFlow/Views/Shared/_LayoutPagePanel.cshtml";
+}
+
+@using (Html.BeginForm("Profile", "Panel", Model, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <hr>
+    <div class="row">
+        <div class="col-md-offset-3 col-md-8">
+            @if (ViewBag.result != null)
+            {
+
+                <div class="alert alert-success">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <span class="glyphicon glyphicon-floppy-saved"></span>  Profil bilgileriniz <strong>Güncellendi.</strong>
+                </div>
+            }
+            @if (Model.ConfirmEMail == false)
+            {
+                if (TempData["PostMail"] !=null)
+                {
+                     <div class="alert alert-info">
+                        <a class="panel-close close" data-dismiss="alert">×</a>
+                        <strong>Mail gönderildi lütfen E-Posta adresinizi kontrol ediniz </strong>
+                    </div>
+                }
+                else
+                {
+
+                    <div class="alert alert-warning">
+                        <a class="panel-close close" data-dismiss="alert">×</a>
+                        <strong>E-Posta adresi onaylanmamış. </strong>   Mail ulaşadıysa <a href="~/WorkFlow/Panel/SendEmailConfrimMail" class="btn btn-success"><span class="fa fa-envelope"> Tekrar Gönder</span> </a>
+                    </div>
+
+                }
+
+            }
+
+        </div>
+
+        <!-- left column -->
+        <div class="col-md-3">
+            <div class="text-center">
+                <img src="~/Content/images/@Model.ProfilPicture" class="img-circle" alt="User Image" height="150" width="150" />
+                <h6>Farklı bir fotoğraf yükle ...</h6>
+                <input type="file" name="ProfilPictures" id="ProfilPictures" class="form-control" />
+
+            </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="col-md-9 personal-info">
+
+
+
+            <h3>Profil Bilgileri</h3>
+
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Ad</label>
+                    <div class="col-lg-8">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Adınızı giriniz", type = "text" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Soyad</label>
+                    <div class="col-lg-8">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.SurName, new { @class = "form-control", placeholder = "Soyadınızı giriniz", type = "text" })
+                        @Html.ValidationMessageFor(model => model.SurName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">E-Posta</label>
+                    <div class="col-lg-8">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "E-Posta giriniz", type = "text", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Telefon Numarası</label>
+                    <div class="col-lg-8">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @id = "phone", name = "phone", placeholder = "Numara giriniz", type = "text" })
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Şiket Adı</label>
+                    <div class="col-lg-8">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.CompanyInfo, new { @class = "form-control", placeholder = "Şirket Adı", type = "text" })
+                        @Html.ValidationMessageFor(model => model.CompanyInfo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Hakkımda</label>
+                    <div class="col-lg-8">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.About, new { @class = "form-control", placeholder = "Bize Kendinizi anlatın", type = "text" })
+                        @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Adres</label>
+                    <div class="col-lg-8">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Address, new { @class = "form-control", placeholder = "Adres giriniz", type = "text" })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-3 pull-right">
+                        <input class="btn btn-success" type="submit" value="Kaydet">
+                        <a href="~/WorkFlow/Panel/Home" class="btn btn-danger">Vazgeç</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+}

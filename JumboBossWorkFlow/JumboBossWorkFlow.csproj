@@ -229,7 +229,62 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Styles\dist\css\AddUser.css" />
+    <Content Include="Content\Styles\dist\css\Calendar\app-skin.css" />
+    <Content Include="Content\Styles\dist\css\Calendar\app.min.css" />
+    <Content Include="Content\Styles\dist\css\Calendar\pace.css" />
+    <Content Include="Content\Styles\dist\css\Calendar\fullcalendar.css" />
     <Content Include="Content\Styles\dist\css\MyWorksCss.css" />
+    <Content Include="Content\StartIndex\css\creative.css" />
+    <Content Include="Content\StartIndex\css\creative.min.css" />
+    <Content Include="Content\StartIndex\gulpfile.js" />
+    <Content Include="Content\StartIndex\img\header.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\fullsize\1.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\fullsize\2.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\fullsize\3.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\fullsize\4.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\fullsize\5.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\fullsize\6.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\thumbnails\1.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\thumbnails\2.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\thumbnails\3.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\thumbnails\4.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\thumbnails\5.jpg" />
+    <Content Include="Content\StartIndex\img\portfolio\thumbnails\6.jpg" />
+    <Content Include="Content\StartIndex\js\creative.js" />
+    <Content Include="Content\StartIndex\js\creative.min.js" />
+    <Content Include="Content\StartIndex\StartContact.css" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\StartIndex\vendor\jquery-easing\jquery.easing.compatibility.js" />
+    <Content Include="Content\StartIndex\vendor\jquery-easing\jquery.easing.js" />
+    <Content Include="Content\StartIndex\vendor\jquery-easing\jquery.easing.min.js" />
+    <Content Include="Content\StartIndex\vendor\jquery\jquery.js" />
+    <Content Include="Content\StartIndex\vendor\jquery\jquery.min.js" />
+    <Content Include="Content\StartIndex\vendor\jquery\jquery.slim.js" />
+    <Content Include="Content\StartIndex\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Content\StartIndex\vendor\magnific-popup\jquery.magnific-popup.js" />
+    <Content Include="Content\StartIndex\vendor\magnific-popup\jquery.magnific-popup.min.js" />
+    <Content Include="Content\StartIndex\vendor\magnific-popup\magnific-popup.css" />
+    <Content Include="Content\StartIndex\vendor\scrollreveal\scrollreveal.js" />
+    <Content Include="Content\StartIndex\vendor\scrollreveal\scrollreveal.min.js" />
+    <Content Include="Content\Styles\dist\js\Calendar\app.js" />
+    <Content Include="Content\Styles\dist\js\Calendar\jquery.cook.min.js" />
+    <Content Include="Content\Styles\dist\js\Calendar\jquery.popupoverlay.min.js" />
+    <Content Include="Content\Styles\dist\js\Calendar\jquery.slimscroll.min.js" />
+    <Content Include="Content\Styles\dist\js\Calendar\pace.min.js" />
+    <Content Include="Content\Styles\dist\js\Calendar\fullcalendar.min.js" />
+    <Content Include="Content\Styles\dist\js\like.js" />
     <Content Include="Error404.aspx" />
     <Content Include="Error500.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -6620,6 +6675,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="logo_7sk_icon.ico" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -7117,7 +7173,7 @@
     <Content Include="Areas\WorkFlow\Views\Panel\WorkFlow.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Panel\Calendar.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Panel\WorkPlan.cshtml" />
-    <Content Include="Areas\WorkFlow\Views\Panel\AddBusiness.cshtml" />
+    <Content Include="Areas\WorkFlow\Views\Panel\AddWork.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Panel\MyWorks.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Panel\WaitingJobs.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Panel\CompletedJobs.cshtml" />
@@ -7126,6 +7182,60 @@
     <Content Include="Areas\WorkFlow\Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Settings\AddUser.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Account\JoinUser.cshtml" />
+    <Content Include="Areas\WorkFlow\Views\Panel\EditWork.cshtml" />
+    <Content Include="Content\StartIndex\img\Thumbs.db" />
+    <Content Include="Content\StartIndex\scss\creative.scss" />
+    <Content Include="Content\StartIndex\scss\_bootstrap-overrides.scss" />
+    <Content Include="Content\StartIndex\scss\_global.scss" />
+    <Content Include="Content\StartIndex\scss\_masthead.scss" />
+    <Content Include="Content\StartIndex\scss\_mixins.scss" />
+    <Content Include="Content\StartIndex\scss\_navbar.scss" />
+    <Content Include="Content\StartIndex\scss\_portfolio.scss" />
+    <Content Include="Content\StartIndex\scss\_services.scss" />
+    <Content Include="Content\StartIndex\scss\_variables.scss" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Content\StartIndex\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\animated.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\core.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\fixed-width.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\font-awesome.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\icons.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\larger.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\list.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\mixins.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\path.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\screen-reader.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\stacked.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\less\variables.less" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_animated.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_core.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_icons.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_larger.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_list.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_mixins.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_path.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_stacked.scss" />
+    <Content Include="Content\StartIndex\vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="Content\StartIndex\vendor\jquery\jquery.min.map" />
+    <Content Include="Content\StartIndex\vendor\jquery\jquery.slim.min.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -7152,17 +7262,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Account\ForgotPassword.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Account\ResetPassword.cshtml" />
     <Content Include="Areas\WorkFlow\Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -7207,6 +7310,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo_7sk_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />

@@ -13,5 +13,6 @@ namespace _BusinessLayer.Messages
         RegisterSuccess=102,
         AddWorkSuccess = 103,
         AddInviteSendSuccess =104,
+        Success=105,
     }
 }

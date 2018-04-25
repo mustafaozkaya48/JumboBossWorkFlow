@@ -13,8 +13,8 @@
         Thereisaproblem = 205,
         ProfileCouldNotUpdated=206,
         AddWorkError=207,
-        SendInvalteError=208    
-
+        SendInvalteError=208 ,   
+        WorkFlowError,
 
     }
 }

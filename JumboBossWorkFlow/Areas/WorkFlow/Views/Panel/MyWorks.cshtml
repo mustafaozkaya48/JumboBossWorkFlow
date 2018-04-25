@@ -7,146 +7,193 @@
     WorkAdditionRepository rp = new WorkAdditionRepository();
 
 }
+<style>
+    .desct {
+        max-height: calc(100vh - 210px);
+        overflow-y: auto;
+    }
 
-<div class="panel-body" style="margin:0 10px 0 10px">
-    <div class="row">
-        <div>
-            <div class="mail-box">
-                <aside class="lg-side">
-                    <div class="inbox-head">
+    .modal-title {
+        max-height: calc(100vh - 210px);
+        overflow-y: auto;
+    }
+</style>
 
-                        <form action="#" class="pull-right position">
-                            <div class="input-append">
-                                <input type="text" id="ara" class="sr-input" placeholder="Ara ">
-                            </div>
-                        </form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="mail-box">
+            <aside class="lg-side">
+                <a class="btn btn-success pull-left btn-lg" style="margin-top:18px;margin-left:10px;margin-right:10px" href="~/WorkFlow/Panel/AddWork"><i class="glyphicon glyphicon-plus"></i> Bir İş Ekle</a>
+                <div class="inbox-head">
+                    <div action="#" class="pull-right position">
+                        <div class="input-append">
+                            <input type="text" id="ara" class="sr-input" placeholder="Ara ">
+                        </div>
                     </div>
+                </div>
+                @if (TempData["jobstateUptade"] != null)
+                {
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6">
+                            <div class="alert alert-success fade in alert-dismissible" style="margin-top:18px;">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="Kapat">×</a>
+                                <strong>Tebrikler bir işi daha bitirdin.!</strong>  Artık bu işe tamamlanan işler seklemsinden erişebilirisin.
+                            </div>
+                        </div>
 
-                    <a class="btn btn-success pull-right btn-lg" style="margin-top:20px;" href="~/WorkFlow/Panel/AddBusiness"><i class="glyphicon glyphicon-plus"></i> Bir İş Ekle</a>
-                    <div class="inbox-body">
-                        <table class="table table-inbox table-hover table-responsive" style="overflow-x:auto;" id="table">
-                            <thead>
-                                <tr class="unread">
-                                    <th class="col-sm-2 view-message  dont-show">Bitiş Tarihi</th>
-                                    <th class="view-message col-sm-3">İşin Konusu</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th class="col-sm-2">
-                                        <span>
-                                            Talep Eden
-                                            <div>
-                                                <span class="label label-success pull-left"> </span>
-                                                <span class="label label-info pull-left"> </span>
-                                                <span class="label label-warning pull-left"> </span>
-                                                <span class="label label-danger pull-left"> </span>
-                                            </div>
-                                        </span>
-                                    </th>
-                                    <th class="col-sm-2">
-                                        <span>
-                                            Görevli
-                                            <div>
-                                                <span class="label label-success pull-left"> </span>
-                                                <span class="label label-info pull-left"> </span>
-                                                <span class="label label-warning pull-left"> </span>
-                                                <span class="label label-danger pull-left"> </span>
-                                            </div>
-                                        </span>
-                                    </th>
+                    </div>
+                }
+                @if (TempData["jobstateplanned"] != null)
+                {
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6">
+                            <div class="alert alert-info fade in alert-dismissible" style="margin-top:18px;">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="Kapat">×</a>
+                                <strong>İş Planlananlar Listene Eklendi.!</strong>  Artık bu işe işlerim seklemsinden erişebilirisin.
+                            </div>
+                        </div>
+
+                    </div>
+                }
+                @if (TempData["jobstateWait"] != null)
+                {
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6">
+                            <div class="alert alert-info fade in alert-dismissible" style="margin-top:18px;">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="Kapat">×</a>
+                                <strong>İş Bekleme Listene Eklendi.!</strong>  Artık bu işe Beklemedeki işlerim seklemsinden erişebilirisin.
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
+
+                <div class="table-responsive">
+                    <table class="table table-hover" id="table">
+                        <thead>
+                            <tr class="unread">
+                                <th class="col-sm-2 view-message  dont-show">Bitiş Tarihi</th>
+                                <th class="view-message col-sm-3">İşin Konusu</th>
+                                <th></th>
+                                <th></th>
+                                <th class="col-sm-2">
+                                    <span>
+                                        Görevli
+                                        <div>
+                                            <span class="label label-success pull-left"> </span>
+                                            <span class="label label-info pull-left"> </span>
+                                            <span class="label label-warning pull-left"> </span>
+                                            <span class="label label-danger pull-left"> </span>
+                                        </div>
+                                    </span>
+                                </th>
+                                <th class="col-sm-2">
+                                    <span>
+                                        Talep Eden
+                                        <div>
+                                            <span class="label label-success pull-left"> </span>
+                                            <span class="label label-info pull-left"> </span>
+                                            <span class="label label-warning pull-left"> </span>
+                                            <span class="label label-danger pull-left"> </span>
+                                            <span class="label label-success pull-left"> </span>
+                                            <span class="label label-info pull-left"> </span>
+                                        </div>
+                                    </span>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td data-toggle="modal" data-target="#work_view_@item.Id" class="view-message  dont-show"><h5>@item.WorkDateTime.ToLongDateString() @item.WorkDateTime.ToShortTimeString() </h5></td>
+                                    <td data-toggle="modal" data-target="#work_view_@item.Id" colspan="3" class="view-message"><h5>@item.WorkTitle</h5></td>
+                                    <td data-toggle="modal" data-target="#work_view_@item.Id"><h4 style="margin-top: 5px;"><span class="label label-success ">@item.EmployeeUser.userInfo.Name @item.EmployeeUser.userInfo.SurName</span></h4></td>
+                                    <td data-toggle="modal" data-target="#work_view_@item.Id"><h4 style="margin-top: 5px;"><span class="label label-info ">@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName</span></h4></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr data-toggle="modal" data-target="#work_view_@item.Id">
-                                        <td class="view-message  dont-show"><h5>@item.WorkDateTime.ToLongDateString() @item.WorkDateTime.ToShortTimeString() </h5></td>
-                                        <td colspan="3" class="view-message"><h5>@item.WorkTitle</h5></td>
-                                        <td><h4 style="margin-top: 5px;"><span class="label label-info ">@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName</span></h4></td>
+                                <tr>
 
-                                        <td><h4 style="margin-top: 5px;"><span class="label label-success ">@item.EmployeeUser.userInfo.Name @item.EmployeeUser.userInfo.SurName</span></h4></td>
-                                        <td>
-                                            <span class="btn-group pull-right" style="margin-top: 5px">
-                                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#work_view_@item.Id"><i class="glyphicon glyphicon-edit"></i></button>
-                                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#work_view"><i class="glyphicon glyphicon-remove"></i></button>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
+                                    <content class="modal fade work_view" id="work_view_@item.Id">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <a href="#" data-dismiss="modal" class="btn btn-lg pull-right"><span class="glyphicon glyphicon-remove"></span></a>
 
-                                        <div class="modal fade work_view" id="work_view_@item.Id">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-                                                        <h3 class="modal-title text-center">@item.WorkTitle</h3>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row">
-                                                            <div class="col-md-12 product_content">
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <h4 class="text-bold"><span class="glyphicon glyphicon-time"></span> Planan Zaman</h4>
-                                                                        <h4>@item.WorkDateTime.ToLongDateString() @item.WorkDateTime.ToShortTimeString()</h4>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <h4 class="text-bold"><span class="glyphicon glyphicon-time"></span> Oluşturlma Zamanı</h4>
-                                                                        <h4>@item.CreateDateTime.ToLongDateString() @item.CreateDateTime.ToShortTimeString()</h4>
-                                                                    </div>
+                                                    <h3 class="modal-title">@item.WorkTitle</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12 product_content">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <h4 class="text-bold"><span class="glyphicon glyphicon-time"></span> Planan Zaman</h4>
+                                                                    <h4>@item.WorkDateTime.ToLongDateString() @item.WorkDateTime.ToShortTimeString()</h4>
                                                                 </div>
-                                                                <hr />
+                                                                <div class="col-md-6">
+                                                                    <h4 class="text-bold"><span class="glyphicon glyphicon-time"></span> Oluşturlma Zamanı</h4>
+                                                                    <h4>@item.CreateDateTime.ToLongDateString() @item.CreateDateTime.ToShortTimeString()</h4>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
 
-                                                                <div class="form-group">
-                                                                    <h4 class="text-bold"><span class="glyphicon glyphicon-info-sign"></span> İş Açıklaması</h4>
-                                                                    <h3>@item.WorkDescription</h3>
-                                                                </div>
-                                                                <hr />
-                                                                <div class="form-group">
-                                                                    <h4 class="text-bold"><span class="glyphicon glyphicon-user"></span> Talep Eden Kişi</h4>
-                                                                    <h3>@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName </h3>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <h4 class="text-bold"><span class="glyphicon glyphicon-folder-open"></span>  Ek Dosyalar</h4>
-                                                                    @foreach (var additionitem in rp.GetWorkAdditions(item.Id))
-                                                                    {
-                                                                    <h4><span class="glyphicon glyphicon-arrow-down"></span><a  href="~/Panel/DownloadFile/@additionitem.Id" target="_blank"> @additionitem.Filename</a></h4>
-                                                                    
-                                                                    }
-                                                                </div>
-                                                                <div class="space-ten"></div>
-                                                                <div class="btn-ground">
-                                                                    <button type="button" class="btn btn-primary btn-lg pull-right" data-dismiss="modal"><i class="fa fa-times-circle"></i> Kapat</button>
-                                                                </div>
+                                                            <div class="form-group desct">
+                                                                <h4 class="text-bold"><span class="glyphicon glyphicon-info-sign"></span> İş Açıklaması</h4>
+                                                                <h3>@item.WorkDescription</h3>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="form-group">
+                                                                <h4 class="text-bold"><span class="glyphicon glyphicon-user"></span> Talep Eden Kişi</h4>
+                                                                <h3>@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName </h3>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <h4 class="text-bold"><span class="glyphicon glyphicon-folder-open"></span>  Ek Dosyalar</h4>
+                                                                @foreach (var additionitem in rp.GetWorkAdditions(item.Id))
+                                                                {
+                                                                    <h4><span class="glyphicon glyphicon-arrow-down"></span><a href="~/Panel/DownloadFile/@additionitem.Id" target="_blank"> @additionitem.Filename</a></h4>
 
+                                                                }
+                                                            </div>
+                                                            <div class="space-ten"></div>
+                                                            <div class="btn-ground">
+                                                                <span class="btn-group pull-left" style="margin-top: 5px">
+                                                                    <a class="btn btn-success btn-lg" href="~/WorkFlow/Panel/JobCompleted/?id=@item.Id&returnUrl=@Request.RawUrl"><i class="glyphicon glyphicon-check"></i> İş Tamamladı</a>
+                                                                    <a class="btn btn-primary btn-lg" href="~/WorkFlow/Panel/JobWait/?id=@item.Id&returnUrl=@Request.RawUrl"><i class="glyphicon glyphicon-time"></i> İşi Beklemeye Al</a>
+                                                                </span>
+                                                            </div>
+
+
+
+                                                            <div class="btn-ground">
+                                                                <span class="btn-group pull-right" style="margin-top: 5px">
+                                                                    <a class="btn btn-warning btn-lg" href="~/WorkFlow/Panel/EditWork/@item.Id"><i class="glyphicon glyphicon-edit"></i> Düzenle</a>
+                                                                    <a class="btn btn-danger btn-lg" href="~/WorkFlow/Panel/DeleteWork/@item.Id"><i class="glyphicon glyphicon-remove"></i> Sil</a>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>
+                                    </content>
+                                </tr>
+                            }
 
 
 
-                                    </tr>
+                        </tbody>
+                    </table>
+                </div>
 
 
 
-
-
-                                }
-
-
-
-                            </tbody>
-                        </table>
-
-                    </div>
-             
-                </aside>
-            </div>
+            </aside>
         </div>
-
     </div>
+
 </div>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 

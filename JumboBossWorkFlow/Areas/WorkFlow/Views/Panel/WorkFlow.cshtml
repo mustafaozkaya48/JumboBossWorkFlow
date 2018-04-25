@@ -1,8 +1,112 @@
-﻿
+﻿@model  List<_DbEntities.Models.ViewModel.WorkViewModel>
+@using System.Globalization
 @{
     ViewBag.Title = "WorkFlow";
     Layout = "~/Areas/WorkFlow/Views/Shared/_LayoutPagePanel.cshtml";
 }
 
-<h2>WorkFlow</h2>
+<section class="content">
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- The time line -->
+            <ul class="timeline">
+                <!-- timeline time label -->
+                @{ 
+                    string[] a = new string[Model.Count];
+                    for (int k= 0; k < Model.Count(); k++)
+                    {
+                        a[k] = Model[k].Works.WorkDateTime.ToShortDateString();
+                    }
+                    a = a.Distinct().ToArray();
+                 
+                }
+                @for (int i = 0; i < a.Count(); i++)
+                {
 
+                    <li class="time-label">
+                        <span class="bg-red">
+
+                            @DateTime.Parse(a[i]).Day.ToString() @CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(@DateTime.Parse(a[i]).Month)  @DateTime.Parse(a[i]).Year
+                        </span>
+                    </li>
+
+                    for (int j = 0; j < Model.Count(); j++)
+                    {
+
+                        if (a[i] == Model[j].Works.WorkDateTime.ToShortDateString())
+                        {
+
+                            <!-- /.timeline-label -->
+                            <!-- timeline item -->
+                            <li>
+                                <i class="fa fa-briefcase bg-blue"></i>
+                                <div class="timeline-item">
+                                    <span class="time" style="font-size:15px"><i class="fa fa-clock-o"></i> @Model[j].Works.WorkDateTime.ToShortTimeString()</span>
+                                    <h3 class="timeline-header"><a>@Model[j].Works.WorkTitle  (<span style="background-color:lightgray">@Model[j].Works.WorkState</span>)</a></h3>
+                                    <div>
+                                        <div class="timeline-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h4 class="text-bold"><span class="glyphicon glyphicon-info-sign"></span> İş Açıklaması</h4>
+                                                    <h4>@Model[j].Works.WorkDescription</h4>
+                                                </div>
+                                              
+                                                <div class="col-md-6">
+                                                    @*Ek Dosyalar*@
+                                                    @if (Model[j].WorkAdditionList.Count>0)
+                                                    {<div class="box box-default collapsed-box" data-widget="collapse">
+                                                            <div class="box-header with-border">
+                                                                <h4 class="box-title"><span class="glyphicon glyphicon-folder-open"></span>  Ek Dosyalar</h4>
+
+                                                                <div class="box-tools pull-right">
+                                                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <!-- /.box-tools -->
+                                                            </div>
+                                                            <!-- /.box-header -->
+                                                            <div class="box-body" style="display: none;">
+
+                                                                @foreach (var adittionitem in Model[j].WorkAdditionList)
+                                                                {
+
+                                                                    <h4><span class="glyphicon glyphicon-arrow-down"></span><a href="~/Panel/DownloadFile/@adittionitem.Id" target="_blank"> @adittionitem.Filename</a></h4>
+
+                                                                }
+                                                            </div>
+                                                            <!-- /.box-body -->
+                                                        </div>
+                                                    }
+                                                    @*Ek Dosyalar*@
+                                                </div>
+                                            </div>
+                                            <div class="timeline-footer">
+                                                @if (Model[j].Works.WorkState != "Tamamlandı")
+                                                {<a class="btn btn-success btn-xs" href="~/WorkFlow/Panel/JobCompleted/?id=@Model[j].Works.Id&returnUrl=@Request.RawUrl">Tamamlandı</a>}
+                                                @if (Model[j].Works.WorkState != "Beklemede")
+                                                {<a class="btn btn-warning btn-xs" href="~/WorkFlow/Panel/JobWait/?id=@Model[j].Works.Id&returnUrl=@Request.RawUrl">Beklemeye al</a>}
+                                                @if (Model[j].Works.WorkState != "Planlanan")
+                                                {<a class="btn btn-primary btn-xs" href="~/WorkFlow/Panel/JobPlanned/?id=@Model[j].Works.Id&returnUrl=@Request.RawUrl">Planlananlara al</a>}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                }
+                
+               
+                <li>
+                    <i class="fa fa-clock-o bg-gray"></i>
+                </li>
+            </ul>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+
+</section>

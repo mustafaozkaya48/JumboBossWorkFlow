@@ -38,6 +38,8 @@ namespace _DbEntities.Models
         public string Work_Id { get; set; }
         [ForeignKey("Work_Id")]
         public ICollection<WorkAddition> WorkAddition { get; set; }
+        [DisplayName("İş Durumu")]
+        public string WorkState { get; set; }
 
 
     }

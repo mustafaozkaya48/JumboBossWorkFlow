@@ -36,9 +36,9 @@
                 {
      
                     @Html.AntiForgeryToken()
-                <div id="login" class="animate form">
+                <div id="login" class="animate form" >
                     <h1>Giriş Yap</h1>
-
+                    <h3 class="text-center">@Html.ValidationMessage("NotUser", "", new { @class = "text-danger" ,style = "font-size:20px" })</h3> 
 
                     <p>
                         <span class="glyphicon glyphicon-envelope"></span> <label for="username" class="uname">E-Posta </label>
@@ -54,7 +54,7 @@
                     </p>
                     <a href="~/WorkFlow/Account/ForgotPassword" class="">Şifremi Unuttum</a>
                     <p class="signin button">
-                      
+
 
                         <input type="submit" id="buttongiris" value="Giriş Yap" />
                     </p>

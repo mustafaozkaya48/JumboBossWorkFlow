@@ -1,0 +1,223 @@
+﻿@model _DbEntities.Models.ViewModel.AddUserViewModel
+@{
+    ViewBag.Title = "Kullanıcı Ekle";
+    Layout = "~/Areas/WorkFlow/Views/Shared/_LayoutPagePanel.cshtml";
+}
+
+<link href="~/Content/Styles/dist/css/AddUser.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-lg-offset-2 col-lg-10 ">
+
+    </div>
+</div>
+@using (Html.BeginForm("AddUser", "Settings", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron ">
+                    <div class="container">
+                        <h1 class="display-3">Kullanıcı Ekleme</h1>
+                        <p class="lead">Kullanıcı eklemek için Email adresi giriniz</p>
+                    </div>
+                </div>
+                <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                        <div class="table-responsive">
+                            @if (ViewBag.result != null)
+                            {
+                                <div class="alert alert-success fade in alert-dismissible" style="margin-top:18px;">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    <strong>@ViewBag.result</strong> Davetinizi kabul ettikten sonra burada görüntüleye bilirisiniz.
+                                </div>
+                            }
+                            @if (ViewBag.error != null)
+                            {
+                                <div class="alert alert-danger fade in alert-dismissible" style="margin-top:18px;">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    @Html.ValidationSummary(false, "")
+                                </div>
+                            }
+
+                            @if (ViewBag.Errorpass != null)
+                            {
+                                <div class="alert alert-danger fade in alert-dismissible" style="margin-top:18px;">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    <strong>Hatalı Şifre !</strong>
+                                </div>
+                            }
+                            <div>
+                                <div class="input-group input-group-sm">
+                                    @Html.TextBoxFor(m => m.EMail, new { @class = "form-control ng-pristine ng-untouched ng-invalid ng-invalid-required ng-valid-email", type = "email", placeholder = "Davet edeceğiniz E-Posta adresini giriniz." })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" type="submit">Davet Et</button>
+                                    </span>
+
+                                </div>
+                                <br />
+                                <br />
+                            </div>
+
+                            <table class="table user-list" id="table">
+                                <thead>
+                                    <tr>
+                                        <th><span>Ad Soyad</span></th>
+                                        <th><span>Kayıt Tarihi</span></th>
+                                        <th class="text-center"><span>Statü</span></th>
+                                        <th><span>E-Posta</span></th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <img src="~/Content/images/@Model.Me.userInfo.ProfilPicture" alt="">
+                                            <a href="#" class="user-link">@Model.Me.userInfo.Name @Model.Me.userInfo.SurName</a>
+                                            <span class="user-subhead">@Model.Me.userInfo.Department</span>
+                                        </td>
+                                        <td>@Model.Me.userInfo.CreatedOn</td>
+                                        <td class="text-center">
+                                            <span class="label label-primary">@Model.Me.userInfo.Department</span>
+                                        </td>
+                                        <td>
+                                            <a href="#">@Model.Me.Email</a>
+                                        </td>
+                                        <td style="width: 20%;">
+                                            <a href="" class="table-link">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                            <a href="#" class="table-link">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-square fa-stack-2x"></i>
+                                                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+
+                                    @foreach (var item in Model.Users)
+                                    {
+                                        <tr>
+                                            <td style="display:none">
+                                                @item.Id
+                                            </td>
+                                            <td>
+                                                <img src="~/Content/images/@item.userInfo.ProfilPicture" alt="">
+                                                <a href="#" class="user-link">@item.userInfo.Name @item.userInfo.SurName</a>
+                                                <span class="user-subhead">@item.userInfo.Department</span>
+                                            </td>
+                                            <td>@item.userInfo.CreatedOn</td>
+                                            <td class="text-center">
+                                                <span class="label label-success">@item.userInfo.Department</span>
+                                            </td>
+                                            <td>
+                                                <a href="#">@item.Email</a>
+                                            </td>
+                                            <td style="width: 20%;">
+                                                <button class="btn btn-danger" data-toggle="modal" data-target="#DeleteModel" contenteditable="false"><i class="fa fa-trash-o"></i> Kullanıcıyı Sil</button>
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- ./wrapper -->
+    <!-- Modal -->
+    <div class="modal fade" id="DeleteModel" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-remove"></span> Ekip Üyesini Sil</h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+
+
+
+                    <div class="form-group">
+                        <h5> Bu işlem ile kulanıncın tüm bilgileri silinir, işlem geri alınamaz.!!!</h5>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Bu işlem için şifre gereklidir</label>
+                        <input type="password" class="form-control" id="psw" name="psw" placeholder="Şifrenizi giriniz">
+                        <input type="text" class="form-control hidden" id="userd" name="userd" placeholder="Şifrenizi giriniz">
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-block"><span class="glyphicon glyphicon-chevron-down"></span> Sil</button>
+                   
+
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Vazgeç</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<script>
+    $(document).ready(function () {
+        $("#btnDeleteuser").click(function () {
+            $("#DeleteModel").modal();
+        });
+    });
+</script>
+<style>
+    .modal-header {
+        background-color: red;
+        color: white !important;
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .modal-footer {
+        background-color: #f9f9f9;
+    }
+</style>
+<script>
+    function selectedRow() {
+
+        var index, table = document.getElementById("table");
+
+        for (var i = 1; i < table.rows.length; i++) {
+            table.rows[i].onclick = function () {
+                // remove the background from the previous selected row
+                if (typeof index !== "undefined") {
+                    table.rows[index].classList.toggle("selected");
+                }
+                // get the selected row index
+                index = this.rowIndex;
+                // add class selected to the row
+                this.classList.toggle("selected");
+                document.getElementById("userd").value = this.cells[0].innerHTML.trim();
+            };
+        }
+
+    }
+    selectedRow();
+
+
+</script>
+<style>
+    .selected {
+        background-color: deepskyblue;
+        font-weight: bold
+    }
+</style>
+

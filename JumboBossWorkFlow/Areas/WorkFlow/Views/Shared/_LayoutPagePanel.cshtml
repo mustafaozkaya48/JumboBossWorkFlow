@@ -32,14 +32,19 @@
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- daterange picker -->
-    <link rel="stylesheet" href="~/Content/bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="~/Content/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="~/Content/plugins/iCheck/all.css">
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+
+    <link href="~/Content/Styles/dist/css/Calendar/pace.css" rel="stylesheet" />
+    <link href="~/Content/Styles/dist/css/Calendar/fullcalendar.css" rel="stylesheet" />
+  
+    <link href="~/Content/Styles/dist/css/Calendar/app-skin.css" rel="stylesheet" />
 
 </head>
 <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
@@ -246,29 +251,29 @@
                         </a>
 
                         <ul class="treeview-menu">
-                            <li><a href="~/WorkFlow/Panel/AddBusiness"><i class="fa fa-plus"></i> İş Ekle</a></li>
+                            <li><a href="~/WorkFlow/Panel/AddWork"><i class="fa fa-plus"></i> İş Ekle</a></li>
                             <li><a href="~/WorkFlow/Panel/MyWorks"><i class="fa fa-edit"></i> İşlerim</a></li>
                             <li><a href="~/WorkFlow/Panel/WaitingJobs"><i class="fa fa-clock-o"></i> Beklemedeki İşler</a></li>
                             <li><a href="~/WorkFlow/Panel/CompletedJobs"><i class="fa fa-check"></i> Tamamlanan İşler</a></li>
 
                         </ul>
                     </li>
-                    @if (currentUser.userInfo.DependencyId ==null)
-    {
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa fa-cog "></i> <span>Ayarlar</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="~/Workflow/Settings/AddUser"><i class="fa fa fa-user-plus"></i> Kullanıcı Ekle</a></li>
+                    @if (currentUser.userInfo.DependencyId == null)
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa fa-cog "></i> <span>Ayarlar</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="~/Workflow/Settings/AddUser"><i class="fa fa fa-user-plus"></i> Kullanıcı Ekle</a></li>
 
 
-                    </ul>
-                </li>
-}
+                            </ul>
+                        </li>
+                    }
 
                 </ul>
             </section>
@@ -460,10 +465,6 @@
 
     <!-- ./wrapper -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <!-- jQuery 3 -->
-    <!-- Bootstrap 3.3.7 -->
-    <!-- Select2 -->
-    <script src="~/Content/bower_components/select2/dist/js/select2.full.min.js"></script>
     <script src="~/Content/Styles/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- SlimScroll -->
     <script src="~/Content/Styles/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -475,10 +476,7 @@
     <script src="~/Content/Styles/dist/js/demo.js"></script>
 
     <!-- jQuery 3 -->
-    <script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
 
-    <!-- date-range-picker -->
-    <script src="~/Content/bower_components/moment/min/moment.min.js"></script>
     <script>
         jQuery(function ($) {
             $('#phone').mask('999 999 9999');
@@ -493,5 +491,11 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/Styles/dist/js/Calendar/fullcalendar.min.js"></script>
+  
+    <script src="~/Content/Styles/dist/js/Calendar/jquery.popupoverlay.min.js"></script>
+    <script src="~/Content/Styles/dist/js/Calendar/jquery.slimscroll.min.js"></script>
+  
+   
 </body>
 </html>

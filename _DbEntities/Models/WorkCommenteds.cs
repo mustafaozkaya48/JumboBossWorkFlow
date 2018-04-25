@@ -10,7 +10,8 @@ namespace _DbEntities.Models
 {
     public partial class WorkCommented
     {
-        public Guid Id { get; set; }
+        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid CommendId { get; set; }
 
         [Required]
         [StringLength(300)]
@@ -19,11 +20,10 @@ namespace _DbEntities.Models
         [Required]
         [StringLength(128)]
         public string User_Id { get; set; }
-
-        public Guid Workflow_Id { get; set; }
-
+        [ForeignKey("User_Id")]
         public virtual ApplicationUser User { get; set; }
-
-        public virtual Work Work { get; set; }
+        public Guid Id { get; set; }
+        [ForeignKey("Id")]
+        public virtual Workflow Workflow { get; set; }
     }
 }

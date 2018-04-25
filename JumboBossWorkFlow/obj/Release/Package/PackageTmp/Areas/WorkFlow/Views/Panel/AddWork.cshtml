@@ -1,0 +1,421 @@
+﻿@model _DbEntities.Models.ViewModel.WorkViewModel
+@{
+    ViewBag.Title = "İş Ekle";
+    Layout = "~/Areas/WorkFlow/Views/Shared/_LayoutPagePanel.cshtml";
+}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<link href="~/Content/Styles/dist/css/AddWork.css" rel="stylesheet" />
+
+@using (Html.BeginForm("AddWork", "Panel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="container">
+        <div class="row">
+
+            @if (ViewBag.result == false)
+            {
+                <br />
+                @Html.ValidationSummary(false, "", new { @class = "alert alert-warning text-center" })
+            }
+            @if (ViewBag.result == true)
+            {
+                <br />
+                <div class="alert alert-success" role="alert">
+                    <strong>İş Eklendi.</strong> Artık işlerim sekmesinde görtüleye bilirisiniz. Şimdi yeni bir iş ekleyebilirisin.
+
+                </div>
+            }
+            <div id="Yukleniyor" class="alert alert-warning" style="display:none">Yükleniyor...</div>
+            <section>
+
+                <div class="wizard">
+                    <div class="wizard-inner">
+                        <div class="connecting-line"></div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Görevli Belirle">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="disabled">
+                                <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="İş Detayları">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="disabled">
+                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="İş Ekleri">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-folder-open"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="disabled">
+                                <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <form role="form">
+                        <div class="tab-content">
+                            <div class="tab-pane active" role="tabpanel" id="step1">
+                                <div class="step1">
+
+
+                                    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+                                    <div class="container bootstrap snippet">
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="main-box no-header clearfix">
+                                                    <div class="main-box-body clearfix">
+
+                                                        <input class="form-control" id="myInput" type="text" placeholder="Ara">
+                                                        <div class="table-responsive" style=" height:400px;overflow-y:auto;width: 100%;">
+
+                                                            <table class="table user-list" id="table" name="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th><span>Adı Soyadı</span></th>
+                                                                        <th class="text-center"><span>Departmanı</span></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="display:none">
+                                                                            @Model.Me.Id
+                                                                        </td>
+                                                                        <td>
+                                                                            <img src="~/Content/images/@Model.Me.userInfo.ProfilPicture" alt="">
+                                                                            <span class="user-link">@Model.Me.userInfo.Name @Model.Me.userInfo.SurName (Ben)</span>
+                                                                            <span class="user-subhead">@Model.Me.userInfo.Department</span>
+                                                                        </td>
+
+                                                                        <td class="text-center">
+                                                                            <span class="label label-default">@Model.Me.userInfo.Department</span>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    @foreach (var item in Model.Users)
+                                                                    {
+
+                                                                        <tr>
+                                                                            <td style="display:none">
+                                                                                @item.Id
+                                                                            </td>
+                                                                            <td>
+                                                                                <img src="~/Content/images/@item.userInfo.ProfilPicture" alt="">
+                                                                                <span class="user-link">@item.userInfo.Name @item.userInfo.SurName</span>
+                                                                                <span class="user-subhead">@item.userInfo.Department</span>
+                                                                            </td>
+
+                                                                            <td class="text-center">
+                                                                                <span class="label label-success">@item.userInfo.Department</span>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    }
+
+
+
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @Html.TextBoxFor(m => m.EmployeeUsers, new { type = "hidden" })
+
+                                <ul class="list-inline pull-right">
+
+                                    <li><button type="button" class="btn btn-primary btn-lg next-step">Bir Sonraki Adım</button></li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="step2">
+
+                                <div class="step-2">
+                                    <div class="box box-primary">
+                                        <div class="box-header with-border">
+                                            <h3 class="text-center">İş Detayları</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            @Html.TextBoxFor(model => model.Works.WorkTitle, new { @class = "form-control input-lg", placeholder = "İş Başlığı", type = "text" })
+
+                                            <br>
+                                            @Html.TextAreaFor(model => model.Works.WorkDescription, new { @class = "form-control", placeholder = "İş Açıklamaası", type = "text", rows = "3" })
+
+                                            <br>
+                                            Tamamlanma Tarihi
+                                            @Html.TextBoxFor(model => model.Works.WorkDateTime, new { @class = "form-control input-lg", type = "datetime-local" })
+
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                </div>
+                                <ul class="list-inline pull-right">
+                                    <li><button type="button" class="btn btn-default btn-lg prev-step">Geri</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-lg next-step">Bir Sonraki Adım</button></li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="step3">
+                                <div class="step33">
+                                    <input class="input-lg" type="file" multiple id="files" name="files" max-file-size="3">
+                                    <div class="upload-drop-zone" id="drop-zone">
+                                        Dosyaları buraya sürükleyip bırakın
+                                    </div>
+                                    <div class="col-md-12 col-xs-12" style="margin-top:20px;">
+                                        <table class="table table-bordered table-hover table-striped table-foldersystem" id="FileTable">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Dosya İsmi</th>
+                                                    <th>Boyut</th>
+                                                    <th>Dosya Uzantısı</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="filetr">
+                                                <tr></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <ul class="list-inline pull-right">
+                                    <li><button type="button" class="btn btn-default btn-lg prev-step">Geri</button></li>
+                                    <li><button type="button" class="btn btn-default btn-lg next-step">Geç</button></li>
+                                    <li><button type="button" class="btn btn-primary btn-lg btn-info-full next-step">Bir Sonraki Adım</button></li>
+
+                                </ul>
+                            </div>
+                            <div class="tab-pane" role="tabpanel" id="complete">
+                                <div class="step44" id="list">
+                                    <div class="row">
+                                        <div class="col-lg-offset-5">
+                                            <h4><strong>Tüm bilgilerin doğruysa</strong></h4>
+                                            <br />
+                                            <button type="submit" class="btn btn-success btn-lg" style="height:100px;width:200px"><i class="fa fa-save fa-9x"></i><h3><strong>Kaydet </strong></h3></button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="~/Content/Styles/dist/js/AddWork.js"></script>
+    <script>
+
+        document.getElementById('files').addEventListener('change', function () {
+            var totalsize = 0;
+            var j = 0;
+            for (var i = 0; i < this.files.length; i++) {
+                var file = this.files[i];
+                var totalsize = totalsize + file.size;
+
+            }
+            if (totalsize < 3145728) {
+                for (var i = 0; i < this.files.length; i++) {
+                    var file = this.files[i];
+                    // This code is only for demo ...
+                    $(table).find('tbody').append("<tr>td><i class='glyphicon glyphicon-folder-open'></i></td> </tr>");
+                    var table = document.getElementById("FileTable");
+                    var row = table.insertRow(1);
+                    var cell = row.insertCell(0);
+                    cell.innerHTML = "<td><i class='glyphicon glyphicon-folder-open'></i></td>";
+                    var cell = row.insertCell(1);
+                    cell.innerHTML = "<td>" + file.name + "</td>";
+                    var cell = row.insertCell(2);
+                    cell.innerHTML = "<td>" + formatBytes(file.size) + "</td>";
+                    var cell = row.insertCell(3);
+                    cell.innerHTML = "<td>" + file.type + "</td>";
+                    var totalsize = totalsize + file.size;
+                    j++;
+                }
+                var row = table.insertRow(j + 1);
+                var cell = row.insertCell(0);
+                cell.innerHTML = "<td></td>";
+                var cell = row.insertCell(1);
+                cell.innerHTML = "<td class='text-right'>Toplam Boyut</td>";
+                var cell = row.insertCell(2);
+                cell.innerHTML = "<td>" + formatBytes(totalsize) + "</td>";
+                var cell = row.insertCell(3);
+                cell.innerHTML = "<td></td>";
+            }
+            else {
+                alert("Dosya 3 MB Büyük Yükleme başarısız !");
+                document.getElementById('files').value = null;
+            }
+        }, false);
+    </script>
+    <script type="text/javascript">
+        function formatBytes(bytes, decimals) {
+            if (bytes == 0) return '0 Bytes';
+            var k = 1024,
+                dm = decimals || 2,
+                sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+                i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+    </script>
+    <script>
+        $(function () {
+            $('form').submit(function () {
+                var isOk = true;
+                $('input[type=files][data-max-size]').each(function () {
+                    if (typeof this.files[0] !== 'undefined') {
+                        var maxSize = parseInt($(this).attr('max-size'), 10),
+                            size = this.files[0].size;
+                        isOk = maxSize > size;
+                        return isOk;
+                    }
+                });
+                return isOk;
+            });
+        });
+    </script>
+    <style>
+        .selected {
+            background-color: deepskyblue;
+            font-weight: bold
+        }
+    </style>
+    <script>
+        function selectedRow() {
+
+            var index, table = document.getElementById("table");
+
+            for (var i = 1; i < table.rows.length; i++) {
+                table.rows[i].onclick = function () {
+                    // remove the background from the previous selected row
+                    if (typeof index !== "undefined") {
+                        table.rows[index].classList.toggle("selected");
+                    }
+                    // get the selected row index
+                    index = this.rowIndex;
+                    // add class selected to the row
+                    this.classList.toggle("selected");
+                    document.getElementById("EmployeeUsers").value = this.cells[0].innerHTML.trim();
+                };
+            }
+
+        }
+        selectedRow();
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+    </script>
+    <style type="text/css">
+        .validation-summary-errors li {
+            list-style: none;
+            margin: 0;
+            font-size: 15px;
+            font-style: oblique;
+            padding: 5px -10px 5px 0px;
+        }
+    </style>
+    <style>
+        body {
+            background: #eee;
+        }
+
+        .main-box.no-header {
+            padding-top: 20px;
+        }
+
+        .main-box {
+            background: #FFFFFF;
+            -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            box-shadow: 1px 1px 2px 0 #CCCCCC;
+            margin-bottom: 16px;
+            -webikt-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        .table a.table-link.danger {
+            color: #e74c3c;
+        }
+
+        .label {
+            border-radius: 3px;
+            font-size: 0.875em;
+            font-weight: 600;
+        }
+
+        .user-list tbody td .user-subhead {
+            font-size: 0.875em;
+            font-style: italic;
+        }
+
+        .user-list tbody td .user-link {
+            display: block;
+            font-size: 1.25em;
+            padding-top: 3px;
+            margin-left: 60px;
+        }
+
+        a {
+            color: #3498db;
+            outline: none !important;
+        }
+
+        .user-list tbody td > img {
+            position: relative;
+            max-width: 50px;
+            float: left;
+            margin-right: 15px;
+        }
+
+        .table thead tr th {
+            text-transform: uppercase;
+            font-size: 0.875em;
+        }
+
+        .table thead tr th {
+            border-bottom: 2px solid #e7ebee;
+        }
+
+        .table tbody tr td:first-child {
+            font-size: 1.125em;
+            font-weight: 300;
+        }
+
+        .table tbody tr td {
+            font-size: 0.875em;
+            vertical-align: middle;
+            border-top: 1px solid #e7ebee;
+            padding: 12px 8px;
+        }
+    </style>
+}

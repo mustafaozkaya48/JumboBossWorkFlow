@@ -1,5 +1,209 @@
-﻿
+﻿@model List<_DbEntities.Models.Workflow>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Areas/WorkFlow/Views/Shared/_LayoutPagePanel.cshtml";
 }
+@using _DbEntities.Repository.Concrete
+
+
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-12" data-workflow-id="@item.Id">
+            <div class="box box-widget">
+                <div class="box-header with-border">
+                    <div class="user-block">
+                        <img class="img-circle" src="~/Content/images/@item.RequestingUser.userInfo.ProfilPicture" alt="User Image">
+                        @if (item.Work.WorkState == "Planlanan")
+                        {
+                            if (item.RequestingUser.Id == item.EmployeeUser.Id)
+                            {
+                                <span class="username"><a>@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName</a> kendisine bir iş ekledi</span>
+                            }
+                            else
+                            {
+
+                                <span class="username"><a>@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName</a> takım arkadaşı <a>@item.EmployeeUser.userInfo.Name @item.EmployeeUser.userInfo.SurName</a> iş ekledi</span>
+                            }
+
+                            <span class="description">@item.Work.UpdateDateTime</span>
+                        }
+                        @if (item.Work.WorkState == "Beklemede")
+                        {
+                            if (item.RequestingUser.Id == item.EmployeeUser.Id)
+                            {
+                                <span class="username"><a>@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName</a> kendisine eklediği bir işi bekelemeye aldı.</span>
+                            }
+                            else
+                            {
+
+                                <span class="username"><a>@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName</a> takım arkadaşı <a>@item.EmployeeUser.userInfo.Name @item.EmployeeUser.userInfo.SurName</a> iş eklediği işi bekelemeye aldı</span>
+                            }
+
+                            <span class="description">@item.Work.UpdateDateTime</span>
+                        }
+                        @if (item.Work.WorkState == "Tamamlandı")
+                        {
+                            if (item.RequestingUser.Id == item.EmployeeUser.Id)
+                            {
+                                <span class="username"><a>@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName</a> kendisine eklediği bir işi Tamamlandı</span>
+                            }
+                            else
+                            {
+
+                                <span class="username"><a>@item.RequestingUser.userInfo.Name @item.RequestingUser.userInfo.SurName</a> takım arkadaşı <a>@item.EmployeeUser.userInfo.Name @item.EmployeeUser.userInfo.SurName</a> iş eklediği bir işi Tamamlandı.</span>
+                            }
+
+                            <span class="description">@item.Work.UpdateDateTime</span>
+                        }
+                    </div>
+                    <!-- /.user-block -->
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <p>@item.Work.WorkTitle</p>
+                    <button type="button" class="btn btn-default btn-xs" data-workflow-id="@item.Id" data-liked="false"><i class="fa fa-thumbs-o-up like-star"></i> Beğen<span class="pull-right text-muted like-count" style="padding-left:5px"> @item.LikeCount</span></button>
+
+                </div>
+                <!-- /.box-body -->
+
+                @if (item.WorkCommented.Count() > 0)
+                {
+                    <div class="box-footer box-comments">
+                        @foreach (var commanditem in item.WorkCommented)
+                        {
+                            <div class="box-comment">
+                                <!-- User image -->
+                                <img class="img-circle img-sm" src="~/Content/images/@commanditem.User.userInfo.ProfilPicture" alt="User Image">
+
+                                <div class="comment-text">
+                                    <span class="username">
+                                        @commanditem.User.userInfo.Name @commanditem.User.userInfo.SurName
+                                        <span class="text-muted pull-right">8:03 PM Today</span>
+                                    </span><!-- /.username -->
+                                    @commanditem.Commented
+                                </div>
+                                <!-- /.comment-text -->
+                            </div>
+                            <!-- /.box-comment -->
+                        }
+                    </div>
+                }
+
+
+
+
+                <!-- /.box-footer -->
+                <div class="box-footer">
+
+                    @{
+                        UserRepository ur = new UserRepository();
+                        string profilpic = ur.GetUserByEmail(User.Identity.Name).userInfo.ProfilPicture;
+                    }
+                    <img class="img-responsive img-circle img-sm" src="~/Content/images/@profilpic" alt="Alt Text">
+                    <!-- .img-push is used to add margin to elements next to floating images -->
+                    @using (Html.BeginForm("Home", "Panel", new { id = item.Id }))
+                    {
+
+                        <div class="img-push">
+                            @*<input type="text" id="commend_@item.Id" data-id="@item.Id" data-userId="@User.Identity.Name" class="form-control input-sm" placeholder="Yorum yapmak için enter tuşuna basın">*@
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="msg" name="msg">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-primary btn-flat">Yorum Yap</button>
+                                </span>
+                            </div>
+                        </div>
+
+                    }
+
+
+
+
+                </div>
+                <!-- /.box-footer -->
+            </div>
+        </div>
+    }
+</div>
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(function () {
+        var Wids = [];
+        $("div[data-workflow-id]").each(function (i, e) {
+            Wids.push($(e).data("workflow-id"));
+        });
+
+        $.ajax({
+            method: "POST",
+            url: "/Panel/GetLiked",
+            data: { ids: Wids }
+        }).done(function (data) {
+
+            if (data.result != null && data.result.length > 0) {
+                for (var i = 0; i < data.result.length; i++) {
+                    var id = data.result[i];
+                    var Likedworkf = $("div[data-workflow-id=" + id + "]");
+                    var btn = Likedworkf.find("button[data-liked]");
+                    var span = btn.find("i.like-star");
+                    btn.data("liked", true);
+                    span.removeClass("fa-thumbs-o-up");
+                    span.addClass("fa-thumbs-up");
+                }
+            }
+        }).fail(function () {
+
+        });
+
+        $("button[data-liked]").click(function () {
+            var btn = $(this);
+            var liked = btn.data("liked");
+            var WorfId = btn.data("workflow-id");
+            var spanstar = btn.find("i.like-star");
+            var spancount = btn.find("span.like-count");
+            console.log(liked);
+            console.log("Like count :" + spancount.text());
+            $.ajax({
+                method: "POST",
+                url: "/Panel/SetLikeState",
+                data: { "workfid": WorfId, "likedstate": !liked }
+            }).done(function (data) {
+                console.log(data);
+                if (data.hasError) {
+                    alert(data.errorMessage);
+                }
+                else {
+                    liked = !liked;
+                    btn.data("liked", liked);
+                    spancount.text(data.result);
+                    console.log("Like count :" + spancount.text());
+                    spanstar.removeClass("fa-thumbs-o-up");
+                    spanstar.removeClass("fa-thumbs-up");
+                    if (liked) {
+                        spanstar.addClass("fa-thumbs-up");
+                    }
+                    else {
+                        spanstar.addClass("fa-thumbs-o-up");
+                    }
+
+                }
+
+            }).fail(function () {
+                alert("Bir hata oluştu giriş yaptığınızdan emin olun.")
+            })
+        })
+    });
+</script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
