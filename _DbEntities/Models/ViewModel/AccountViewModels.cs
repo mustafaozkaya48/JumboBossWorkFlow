@@ -80,7 +80,7 @@ namespace _DbEntities.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Şifre Tekrar")]
-        [Required(), Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Required(), Compare("Password", ErrorMessage = "Şifre ve onay şifresi uyuşmuyor")]
         public string ConfirmPassword { get; set; }
         [Required(), StringLength(25), DisplayName("Ad")]
         public string Name { get; set; }
@@ -148,7 +148,7 @@ namespace _DbEntities.Models
         public string Password { get; set; }
         [DataType(DataType.Password)]
         [Display(Name = "Şifre Tekrar")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Şifre ve doğrulama şifresi uyuşmuyor.")]
         public string ConfirmPassword { get; set; }
         public string UserName { get; set; }
         [Required(), StringLength(10), DisplayName("Telefon Numarası"), MinLength(10, ErrorMessage = "Lütfen 11 haneli telefon numarası giriniz.")]
